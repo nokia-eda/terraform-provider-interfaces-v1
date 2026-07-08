@@ -1,0 +1,53 @@
+datasources:
+  - model_name: app_group
+    oas_endpoint: /apps/interfaces.eda.nokia.com
+    oas_schema: AppGroup
+  - model_name: resource_list
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1
+    oas_schema: ResourceList
+  - model_name: breakout_list
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts
+    oas_schema: com.nokia.eda.interfaces.v1.BreakoutList
+  - model_name: breakout
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts/{name}
+    oas_schema: com.nokia.eda.interfaces.v1.Breakout
+  - model_name: interface_list
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/interfaces
+    oas_schema: com.nokia.eda.interfaces.v1.InterfaceList
+  - model_name: interface
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/interfaces/{name}
+    oas_schema: com.nokia.eda.interfaces.v1.Interface
+  - model_name: check_interfaces_list
+    oas_endpoint: /workflows/v1/interfaces.eda.nokia.com/v1/namespaces/{namespace}/checkinterfacess
+    oas_schema: com.nokia.eda.interfaces.v1.CheckInterfacesList
+  - model_name: check_interfaces
+    oas_endpoint: /workflows/v1/interfaces.eda.nokia.com/v1/namespaces/{namespace}/checkinterfacess/{name}
+    oas_schema: com.nokia.eda.interfaces.v1.CheckInterfaces
+  - model_name: workflow_get_inputs_resp_elem
+    oas_endpoint: /workflows/v1/interfaces.eda.nokia.com/v1/namespaces/{namespace}/checkinterfacess/{name}/_input
+    oas_schema: WorkflowGetInputsRespElem
+
+resources:
+  - model_name: breakout
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts
+    oas_schema: com.nokia.eda.interfaces.v1.Breakout
+  - model_name: interface
+    oas_endpoint: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/interfaces
+    oas_schema: com.nokia.eda.interfaces.v1.Interface
+  - model_name: check_interfaces
+    oas_endpoint: /workflows/v1/interfaces.eda.nokia.com/v1/namespaces/{namespace}/checkinterfacess
+    oas_schema: com.nokia.eda.interfaces.v1.CheckInterfaces
+
+qualified:
+  datasources:
+    - oas_schema: IntentTargets
+      get: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts/{name}/_targets
+    - oas_schema: ResourceHistory
+      get: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts/{name}/_revs
+    - oas_schema: UIResult
+      get: /apps/interfaces.eda.nokia.com/v1/_ui/{pathname}
+    - oas_schema: com.nokia.eda.interfaces.v1.Breakout_DeletedResources
+      get: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/breakouts/_deleted
+    - oas_schema: com.nokia.eda.interfaces.v1.Interface_DeletedResources
+      get: /apps/interfaces.eda.nokia.com/v1/namespaces/{namespace}/interfaces/_deleted
+  resources:
