@@ -104,22 +104,22 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 						"spec": schema.SingleNestedAttribute{
 							Attributes: map[string]schema.Attribute{
 								"ddm": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Enables reporting of DDM events.",
 									MarkdownDescription: "Enables reporting of DDM events.",
 								},
 								"description": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Description of the interface.",
 									MarkdownDescription: "Description of the interface.",
 								},
 								"enabled": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Enable or disable the interface.",
 									MarkdownDescription: "Enable or disable the interface.",
 								},
 								"encap_type": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Enable or disable VLAN tagging on this interface. [default=\"Null\"]",
 									MarkdownDescription: "Enable or disable VLAN tagging on this interface. [default=\"Null\"]",
 								},
@@ -128,19 +128,19 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 										"crc_monitor": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"enabled": schema.BoolAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Enables CRC monitoring on the interface.",
 													MarkdownDescription: "Enables CRC monitoring on the interface.",
 												},
 												"signal_degrade": schema.SingleNestedAttribute{
 													Attributes: map[string]schema.Attribute{
 														"exponent": schema.Int64Attribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Threshold exponent for the signal degrade condition.",
 															MarkdownDescription: "Threshold exponent for the signal degrade condition.",
 														},
 														"multiplier": schema.Int64Attribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Threshold multiplier for the signal degrade condition.",
 															MarkdownDescription: "Threshold multiplier for the signal degrade condition.",
 														},
@@ -150,19 +150,19 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 															AttrTypes: SignalDegradeValue{}.AttributeTypes(ctx),
 														},
 													},
-													Optional:            true,
+													Computed:            true,
 													Description:         "Signal degrade threshold configuration.\neda:ui:title=\"Signal Degrade\"",
 													MarkdownDescription: "Signal degrade threshold configuration.\neda:ui:title=\"Signal Degrade\"",
 												},
 												"signal_failure": schema.SingleNestedAttribute{
 													Attributes: map[string]schema.Attribute{
 														"exponent": schema.Int64Attribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Threshold exponent for the signal failure condition.",
 															MarkdownDescription: "Threshold exponent for the signal failure condition.",
 														},
 														"multiplier": schema.Int64Attribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Threshold multiplier for the signal failure condition.",
 															MarkdownDescription: "Threshold multiplier for the signal failure condition.",
 														},
@@ -172,12 +172,12 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 															AttrTypes: SignalFailureValue{}.AttributeTypes(ctx),
 														},
 													},
-													Optional:            true,
+													Computed:            true,
 													Description:         "Signal failure threshold configuration.\neda:ui:title=\"Signal Failure\"",
 													MarkdownDescription: "Signal failure threshold configuration.\neda:ui:title=\"Signal Failure\"",
 												},
 												"window_size_seconds": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Sliding window size over which CRC errors are measured, in number of seconds.",
 													MarkdownDescription: "Sliding window size over which CRC errors are measured, in number of seconds.",
 												},
@@ -187,69 +187,69 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: CrcMonitorValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Configuration of CRC monitoring on the interface.",
 											MarkdownDescription: "Configuration of CRC monitoring on the interface.",
 										},
 										"fec": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Sets the Forward Error Correction (FEC) on the members of the interface.",
 											MarkdownDescription: "Sets the Forward Error Correction (FEC) on the members of the interface.",
 										},
 										"hold_down_timer_ms": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The hold-time down behavior is triggered with events that try to bring the ethernet interface down and can change quickly. It is not triggered with an admin-state disable event or interface disable due to other internal reasons.  Units in milliseconds.",
 											MarkdownDescription: "The hold-time down behavior is triggered with events that try to bring the ethernet interface down and can change quickly. It is not triggered with an admin-state disable event or interface disable due to other internal reasons.  Units in milliseconds.",
 										},
 										"hold_up_timer_ms": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The hold-time up behavior is triggered with any event that tries to bring up the ethernet interface.  While the hold-time up is running, the transceiver laser will be enabled, however the higher layers will not be notified that the interface is operationally up until the timer expires.  Units in milliseconds.",
 											MarkdownDescription: "The hold-time up behavior is triggered with any event that tries to bring up the ethernet interface.  While the hold-time up is running, the transceiver laser will be enabled, however the higher layers will not be notified that the interface is operationally up until the timer expires.  Units in milliseconds.",
 										},
 										"loopback_mode": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Enable dataplane loopback on the interface.",
 											MarkdownDescription: "Enable dataplane loopback on the interface.",
 										},
 										"reload_delay_timer_seconds": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established.",
 											MarkdownDescription: "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established.",
 										},
 										"speed": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The speed of this interface, in human-readable format - e.g. 25G, 100G.",
 											MarkdownDescription: "The speed of this interface, in human-readable format - e.g. 25G, 100G.",
 										},
 										"standby_signaling": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Indicates the standby-signaling used in the interface.",
 											MarkdownDescription: "Indicates the standby-signaling used in the interface.",
 										},
 										"storm_control": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"broadcast_rate": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Sets the maximum rate allowed for ingress broadcast frames on the interface.",
 													MarkdownDescription: "Sets the maximum rate allowed for ingress broadcast frames on the interface.",
 												},
 												"enabled": schema.BoolAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Enables storm control.",
 													MarkdownDescription: "Enables storm control.",
 												},
 												"multicast_rate": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Sets the maximum rate allowed for ingress multicast frames on the interface.",
 													MarkdownDescription: "Sets the maximum rate allowed for ingress multicast frames on the interface.",
 												},
 												"unit": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Set the unit of measurement for the storm control rates.",
 													MarkdownDescription: "Set the unit of measurement for the storm control rates.",
 												},
 												"unknown_unicast_rate": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Sets the maximum rate allowed for ingress unknown unicast frames on the interface.",
 													MarkdownDescription: "Sets the maximum rate allowed for ingress unknown unicast frames on the interface.",
 												},
@@ -259,13 +259,13 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: StormControlValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Enables storm control.",
 											MarkdownDescription: "Enables storm control.",
 										},
 										"transparent_l2cp_protocols": schema.ListAttribute{
 											ElementType:         types.StringType,
-											Optional:            true,
+											Computed:            true,
 											Description:         "A list of L2CP protocols to tunnel. Options: LLDP, LACP, xSTP, Dot1x, PTP, All.",
 											MarkdownDescription: "A list of L2CP protocols to tunnel. Options: LLDP, LACP, xSTP, Dot1x, PTP, All.",
 										},
@@ -275,7 +275,7 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: EthernetValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Ethernet configuration options.",
 									MarkdownDescription: "Ethernet configuration options.",
 								},
@@ -284,24 +284,24 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 										"lacp": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"admin_key": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Configure the LACP admin-key to be advertised by the local system.",
 													MarkdownDescription: "Configure the LACP admin-key to be advertised by the local system.",
 												},
 												"interval": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Set the period between LACP messages, uses the lacp-period-type enumeration. [default=\"Fast\"]",
 													MarkdownDescription: "Set the period between LACP messages, uses the lacp-period-type enumeration. [default=\"Fast\"]",
 												},
 												"lacp_fallback": schema.SingleNestedAttribute{
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Specifies lacp-fallback mode if enabled.",
 															MarkdownDescription: "Specifies lacp-fallback mode if enabled.",
 														},
 														"timeout_seconds": schema.Int64Attribute{
-															Optional:            true,
+															Computed:            true,
 															Description:         "Specifies the LACP-fallback timeout interval in seconds. [default=60]",
 															MarkdownDescription: "Specifies the LACP-fallback timeout interval in seconds. [default=60]",
 														},
@@ -311,22 +311,22 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 															AttrTypes: LacpFallbackValue{}.AttributeTypes(ctx),
 														},
 													},
-													Optional:            true,
+													Computed:            true,
 													Description:         "LACP fallback allows one or more designated links of an LACP controlled LAG to go into forwarding mode if LACP is not yet operational after a configured timeout period. [default=disabled]",
 													MarkdownDescription: "LACP fallback allows one or more designated links of an LACP controlled LAG to go into forwarding mode if LACP is not yet operational after a configured timeout period. [default=disabled]",
 												},
 												"mode": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Active is to initiate the transmission of LACP PDUs. Passive is to wait for peer to initiate the transmission of LACP PDUs.[default=\"Active\"]",
 													MarkdownDescription: "Active is to initiate the transmission of LACP PDUs. Passive is to wait for peer to initiate the transmission of LACP PDUs.[default=\"Active\"]",
 												},
 												"system_mac": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "The MAC address portion of the Node's System ID. This is combined with the system priority to construct the 8-octet system-id.",
 													MarkdownDescription: "The MAC address portion of the Node's System ID. This is combined with the system priority to construct the 8-octet system-id.",
 												},
 												"system_priority": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "System priority used by the Node on this LAG interface. Lower value is higher priority for determining which Node is the controlling system.[default=32768]",
 													MarkdownDescription: "System priority used by the Node on this LAG interface. Lower value is higher priority for determining which Node is the controlling system.[default=32768]",
 												},
@@ -336,46 +336,68 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: LacpValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "LACP properties. This section is only applicable if the LAG type is set to LACP.",
 											MarkdownDescription: "LACP properties. This section is only applicable if the LAG type is set to LACP.",
 										},
 										"min_links": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "The min-link threshold specifies the minimum number of member links that must be active in order for the LAG to be operationally up. If the number of active links falls below this threshold, the entire LAG is brought operationally down.[default=1]",
 											MarkdownDescription: "The min-link threshold specifies the minimum number of member links that must be active in order for the LAG to be operationally up. If the number of active links falls below this threshold, the entire LAG is brought operationally down.[default=1]",
 										},
 										"multihoming": schema.SingleNestedAttribute{
 											Attributes: map[string]schema.Attribute{
 												"df_election": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Selects the DF election algorithm. If not specified, `default` is used with `AllActive` multi-homing and `HighestPreference` is used with `SingleActive` and `PortActive` multi-homing modes.",
 													MarkdownDescription: "Selects the DF election algorithm. If not specified, `default` is used with `AllActive` multi-homing and `HighestPreference` is used with `SingleActive` and `PortActive` multi-homing modes.",
 												},
 												"esi": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "10 byte Ethernet Segment Identifier, if not set a type 0 ESI is generated. [default=auto]",
 													MarkdownDescription: "10 byte Ethernet Segment Identifier, if not set a type 0 ESI is generated. [default=auto]",
 												},
 												"mode": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "\"AllActive\": All interfaces are active. \"SingleActive\": In a single active MH LAG, the active and standby function is handled at the sub-interface layer within a network-instance.  That is, the physical interfaces within the same LAG all remain operationally up, however each sub-interface associated with a network-instance has its operational state up or down based on whether it is selected to be the active or standby sub-interface. \"PortActive\": When port active MH LAG is enabled, the active and standby function is handled at the interface level.",
 													MarkdownDescription: "\"AllActive\": All interfaces are active. \"SingleActive\": In a single active MH LAG, the active and standby function is handled at the sub-interface layer within a network-instance.  That is, the physical interfaces within the same LAG all remain operationally up, however each sub-interface associated with a network-instance has its operational state up or down based on whether it is selected to be the active or standby sub-interface. \"PortActive\": When port active MH LAG is enabled, the active and standby function is handled at the interface level.",
 												},
 												"preferred_active_node": schema.StringAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured.",
 													MarkdownDescription: "When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured.",
 												},
 												"reload_delay_timer_seconds": schema.Int64Attribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]",
 													MarkdownDescription: "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]",
 												},
 												"revertive": schema.BoolAttribute{
-													Optional:            true,
+													Computed:            true,
 													Description:         "Enables revertive DF election behavior with Preference-Based Election mode. [default=false]",
 													MarkdownDescription: "Enables revertive DF election behavior with Preference-Based Election mode. [default=false]",
+												},
+												"vtep": schema.SingleNestedAttribute{
+													Attributes: map[string]schema.Attribute{
+														"anycast_ipv4pool": schema.StringAttribute{
+															Computed:            true,
+															Description:         "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast.",
+															MarkdownDescription: "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast.",
+														},
+														"mode": schema.StringAttribute{
+															Computed:            true,
+															Description:         "VTEP mode for the Multi-homed Ethernet Segment.",
+															MarkdownDescription: "VTEP mode for the Multi-homed Ethernet Segment.",
+														},
+													},
+													CustomType: VtepType{
+														ObjectType: types.ObjectType{
+															AttrTypes: VtepValue{}.AttributeTypes(ctx),
+														},
+													},
+													Computed:            true,
+													Description:         "VTEP mode configuration for the Multi-homed Ethernet Segment.",
+													MarkdownDescription: "VTEP mode configuration for the Multi-homed Ethernet Segment.",
 												},
 											},
 											CustomType: MultihomingType{
@@ -383,12 +405,12 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 													AttrTypes: MultihomingValue{}.AttributeTypes(ctx),
 												},
 											},
-											Optional:            true,
+											Computed:            true,
 											Description:         "Multi-homing properties.",
 											MarkdownDescription: "Multi-homing properties.",
 										},
 										"type": schema.StringAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "This type defines whether whether it is a static or LACP LAG. [default=LACP]",
 											MarkdownDescription: "This type defines whether whether it is a static or LACP LAG. [default=LACP]",
 										},
@@ -398,12 +420,12 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: LagValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "LAG configuration options.",
 									MarkdownDescription: "LAG configuration options.",
 								},
 								"lldp": schema.BoolAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Enable or disable LLDP on the members of the interface.",
 									MarkdownDescription: "Enable or disable LLDP on the members of the interface.",
 								},
@@ -411,32 +433,32 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"aggregate_id": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "When using a LAG, the aggregateId can be specified per set of interfaces on a node.\nLAG interface with which this interface is associated.",
 												MarkdownDescription: "When using a LAG, the aggregateId can be specified per set of interfaces on a node.\nLAG interface with which this interface is associated.",
 											},
 											"description": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Description of the member, inherited from the interface if not provided.",
 												MarkdownDescription: "Description of the member, inherited from the interface if not provided.",
 											},
 											"enabled": schema.BoolAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Enable or disable this member.",
 												MarkdownDescription: "Enable or disable this member.",
 											},
 											"interface": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Reference to an interface in the normalized format. Ex: SRL ethernet-1/1 would be ethernet-1-1. SROS port 2/1/1 would be ethernet-2-1.",
 												MarkdownDescription: "Reference to an interface in the normalized format. Ex: SRL ethernet-1/1 would be ethernet-1-1. SROS port 2/1/1 would be ethernet-2-1.",
 											},
 											"lacp_port_priority": schema.Int64Attribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Configure the port priority for LACP. This value is used to determine which port should be activated with LACP fallback mode. Lower values are more preferred.[default=32768]",
 												MarkdownDescription: "Configure the port priority for LACP. This value is used to determine which port should be activated with LACP fallback mode. Lower values are more preferred.[default=32768]",
 											},
 											"node": schema.StringAttribute{
-												Optional:            true,
+												Computed:            true,
 												Description:         "Node name.",
 												MarkdownDescription: "Node name.",
 											},
@@ -447,22 +469,22 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 											},
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "List of members on which to apply properties, for single interface this would be a list of 1.",
 									MarkdownDescription: "List of members on which to apply properties, for single interface this would be a list of 1.",
 								},
 								"mode": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Set interface mode for platforms that support explicit configuration of access or network mode. [SROS only]",
 									MarkdownDescription: "Set interface mode for platforms that support explicit configuration of access or network mode. [SROS only]",
 								},
 								"mtu": schema.Int64Attribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "MTU to apply on the interface(s).",
 									MarkdownDescription: "MTU to apply on the interface(s).",
 								},
 								"type": schema.StringAttribute{
-									Optional:            true,
+									Computed:            true,
 									Description:         "Type defines whether the interface is a LAG or a regular Interface.",
 									MarkdownDescription: "Type defines whether the interface is a LAG or a regular Interface.",
 								},
@@ -472,7 +494,7 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "Interface allows for the configuration of various interface properties such as enabling/disabling the interface, setting descriptions, specifying interface types (e.g., LAG, interface, loopback), configuring VLAN encapsulation, and setting Ethernet or LAG-specific options.",
 							MarkdownDescription: "Interface allows for the configuration of various interface properties such as enabling/disabling the interface, setting descriptions, specifying interface types (e.g., LAG, interface, loopback), configuring VLAN encapsulation, and setting Ethernet or LAG-specific options.",
 						},
@@ -526,18 +548,23 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 												Description:         "Indicates when this member last changed state.",
 												MarkdownDescription: "Indicates when this member last changed state.",
 											},
+											"lldp_operational_state": schema.StringAttribute{
+												Computed:            true,
+												Description:         "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+												MarkdownDescription: "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+											},
 											"neighbors": schema.ListNestedAttribute{
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"interface": schema.StringAttribute{
 															Computed:            true,
-															Description:         "The name of a neighbor interface of this member in node specific format.",
-															MarkdownDescription: "The name of a neighbor interface of this member in node specific format.",
+															Description:         "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
+															MarkdownDescription: "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
 														},
 														"node": schema.StringAttribute{
 															Computed:            true,
-															Description:         "The name of a neighbor node of this member in node specific format.",
-															MarkdownDescription: "The name of a neighbor node of this member in node specific format.",
+															Description:         "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
+															MarkdownDescription: "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
 														},
 													},
 													CustomType: NeighborsType{
@@ -564,6 +591,11 @@ func InterfaceListDataSourceSchema(ctx context.Context) schema.Schema {
 												Computed:            true,
 												Description:         "Indicates the current operational state of this member.",
 												MarkdownDescription: "Indicates the current operational state of this member.",
+											},
+											"operational_state_reason": schema.StringAttribute{
+												Computed:            true,
+												Description:         "Indicates the reason for the operational state. Currently only used when the state is Down.",
+												MarkdownDescription: "Indicates the reason for the operational state. Currently only used when the state is Down.",
 											},
 											"speed": schema.StringAttribute{
 												Computed:            true,
@@ -8197,6 +8229,24 @@ func (t MultihomingType) ValueFromObject(ctx context.Context, in basetypes.Objec
 			fmt.Sprintf(`revertive expected to be basetypes.BoolValue, was: %T`, revertiveAttribute))
 	}
 
+	vtepAttribute, ok := attributes["vtep"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`vtep is missing from object`)
+
+		return nil, diags
+	}
+
+	vtepVal, ok := vtepAttribute.(basetypes.ObjectValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`vtep expected to be basetypes.ObjectValue, was: %T`, vtepAttribute))
+	}
+
 	if diags.HasError() {
 		return nil, diags
 	}
@@ -8208,6 +8258,7 @@ func (t MultihomingType) ValueFromObject(ctx context.Context, in basetypes.Objec
 		PreferredActiveNode:     preferredActiveNodeVal,
 		ReloadDelayTimerSeconds: reloadDelayTimerSecondsVal,
 		Revertive:               revertiveVal,
+		Vtep:                    vtepVal,
 		state:                   attr.ValueStateKnown,
 	}, diags
 }
@@ -8383,6 +8434,24 @@ func NewMultihomingValue(attributeTypes map[string]attr.Type, attributes map[str
 			fmt.Sprintf(`revertive expected to be basetypes.BoolValue, was: %T`, revertiveAttribute))
 	}
 
+	vtepAttribute, ok := attributes["vtep"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`vtep is missing from object`)
+
+		return NewMultihomingValueUnknown(), diags
+	}
+
+	vtepVal, ok := vtepAttribute.(basetypes.ObjectValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`vtep expected to be basetypes.ObjectValue, was: %T`, vtepAttribute))
+	}
+
 	if diags.HasError() {
 		return NewMultihomingValueUnknown(), diags
 	}
@@ -8394,6 +8463,7 @@ func NewMultihomingValue(attributeTypes map[string]attr.Type, attributes map[str
 		PreferredActiveNode:     preferredActiveNodeVal,
 		ReloadDelayTimerSeconds: reloadDelayTimerSecondsVal,
 		Revertive:               revertiveVal,
+		Vtep:                    vtepVal,
 		state:                   attr.ValueStateKnown,
 	}, diags
 }
@@ -8472,11 +8542,12 @@ type MultihomingValue struct {
 	PreferredActiveNode     basetypes.StringValue `tfsdk:"preferred_active_node"`
 	ReloadDelayTimerSeconds basetypes.Int64Value  `tfsdk:"reload_delay_timer_seconds"`
 	Revertive               basetypes.BoolValue   `tfsdk:"revertive"`
+	Vtep                    basetypes.ObjectValue `tfsdk:"vtep"`
 	state                   attr.ValueState
 }
 
 func (v MultihomingValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 6)
+	attrTypes := make(map[string]tftypes.Type, 7)
 
 	var val tftypes.Value
 	var err error
@@ -8487,12 +8558,15 @@ func (v MultihomingValue) ToTerraformValue(ctx context.Context) (tftypes.Value, 
 	attrTypes["preferred_active_node"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["reload_delay_timer_seconds"] = basetypes.Int64Type{}.TerraformType(ctx)
 	attrTypes["revertive"] = basetypes.BoolType{}.TerraformType(ctx)
+	attrTypes["vtep"] = basetypes.ObjectType{
+		AttrTypes: VtepValue{}.AttributeTypes(ctx),
+	}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 6)
+		vals := make(map[string]tftypes.Value, 7)
 
 		val, err = v.DfElection.ToTerraformValue(ctx)
 
@@ -8542,6 +8616,14 @@ func (v MultihomingValue) ToTerraformValue(ctx context.Context) (tftypes.Value, 
 
 		vals["revertive"] = val
 
+		val, err = v.Vtep.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["vtep"] = val
+
 		if err := tftypes.ValidateValue(objectType, vals); err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
 		}
@@ -8571,6 +8653,27 @@ func (v MultihomingValue) String() string {
 func (v MultihomingValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
+	var vtep basetypes.ObjectValue
+
+	if v.Vtep.IsNull() {
+		vtep = types.ObjectNull(
+			VtepValue{}.AttributeTypes(ctx),
+		)
+	}
+
+	if v.Vtep.IsUnknown() {
+		vtep = types.ObjectUnknown(
+			VtepValue{}.AttributeTypes(ctx),
+		)
+	}
+
+	if !v.Vtep.IsNull() && !v.Vtep.IsUnknown() {
+		vtep = types.ObjectValueMust(
+			VtepValue{}.AttributeTypes(ctx),
+			v.Vtep.Attributes(),
+		)
+	}
+
 	attributeTypes := map[string]attr.Type{
 		"df_election":                basetypes.StringType{},
 		"esi":                        basetypes.StringType{},
@@ -8578,6 +8681,9 @@ func (v MultihomingValue) ToObjectValue(ctx context.Context) (basetypes.ObjectVa
 		"preferred_active_node":      basetypes.StringType{},
 		"reload_delay_timer_seconds": basetypes.Int64Type{},
 		"revertive":                  basetypes.BoolType{},
+		"vtep": basetypes.ObjectType{
+			AttrTypes: VtepValue{}.AttributeTypes(ctx),
+		},
 	}
 
 	if v.IsNull() {
@@ -8597,6 +8703,7 @@ func (v MultihomingValue) ToObjectValue(ctx context.Context) (basetypes.ObjectVa
 			"preferred_active_node":      v.PreferredActiveNode,
 			"reload_delay_timer_seconds": v.ReloadDelayTimerSeconds,
 			"revertive":                  v.Revertive,
+			"vtep":                       vtep,
 		})
 
 	return objVal, diags
@@ -8641,6 +8748,10 @@ func (v MultihomingValue) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.Vtep.Equal(other.Vtep) {
+		return false
+	}
+
 	return true
 }
 
@@ -8660,6 +8771,388 @@ func (v MultihomingValue) AttributeTypes(ctx context.Context) map[string]attr.Ty
 		"preferred_active_node":      basetypes.StringType{},
 		"reload_delay_timer_seconds": basetypes.Int64Type{},
 		"revertive":                  basetypes.BoolType{},
+		"vtep": basetypes.ObjectType{
+			AttrTypes: VtepValue{}.AttributeTypes(ctx),
+		},
+	}
+}
+
+var _ basetypes.ObjectTypable = VtepType{}
+
+type VtepType struct {
+	basetypes.ObjectType
+}
+
+func (t VtepType) Equal(o attr.Type) bool {
+	other, ok := o.(VtepType)
+
+	if !ok {
+		return false
+	}
+
+	return t.ObjectType.Equal(other.ObjectType)
+}
+
+func (t VtepType) String() string {
+	return "VtepType"
+}
+
+func (t VtepType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	attributes := in.Attributes()
+
+	anycastIpv4poolAttribute, ok := attributes["anycast_ipv4pool"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`anycast_ipv4pool is missing from object`)
+
+		return nil, diags
+	}
+
+	anycastIpv4poolVal, ok := anycastIpv4poolAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`anycast_ipv4pool expected to be basetypes.StringValue, was: %T`, anycastIpv4poolAttribute))
+	}
+
+	modeAttribute, ok := attributes["mode"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`mode is missing from object`)
+
+		return nil, diags
+	}
+
+	modeVal, ok := modeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`mode expected to be basetypes.StringValue, was: %T`, modeAttribute))
+	}
+
+	if diags.HasError() {
+		return nil, diags
+	}
+
+	return VtepValue{
+		AnycastIpv4pool: anycastIpv4poolVal,
+		Mode:            modeVal,
+		state:           attr.ValueStateKnown,
+	}, diags
+}
+
+func NewVtepValueNull() VtepValue {
+	return VtepValue{
+		state: attr.ValueStateNull,
+	}
+}
+
+func NewVtepValueUnknown() VtepValue {
+	return VtepValue{
+		state: attr.ValueStateUnknown,
+	}
+}
+
+func NewVtepValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (VtepValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
+	ctx := context.Background()
+
+	for name, attributeType := range attributeTypes {
+		attribute, ok := attributes[name]
+
+		if !ok {
+			diags.AddError(
+				"Missing VtepValue Attribute Value",
+				"While creating a VtepValue value, a missing attribute value was detected. "+
+					"A VtepValue must contain values for all attributes, even if null or unknown. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("VtepValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
+			)
+
+			continue
+		}
+
+		if !attributeType.Equal(attribute.Type(ctx)) {
+			diags.AddError(
+				"Invalid VtepValue Attribute Type",
+				"While creating a VtepValue value, an invalid attribute value was detected. "+
+					"A VtepValue must use a matching attribute type for the value. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("VtepValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
+					fmt.Sprintf("VtepValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
+			)
+		}
+	}
+
+	for name := range attributes {
+		_, ok := attributeTypes[name]
+
+		if !ok {
+			diags.AddError(
+				"Extra VtepValue Attribute Value",
+				"While creating a VtepValue value, an extra attribute value was detected. "+
+					"A VtepValue must not contain values beyond the expected attribute types. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("Extra VtepValue Attribute Name: %s", name),
+			)
+		}
+	}
+
+	if diags.HasError() {
+		return NewVtepValueUnknown(), diags
+	}
+
+	anycastIpv4poolAttribute, ok := attributes["anycast_ipv4pool"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`anycast_ipv4pool is missing from object`)
+
+		return NewVtepValueUnknown(), diags
+	}
+
+	anycastIpv4poolVal, ok := anycastIpv4poolAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`anycast_ipv4pool expected to be basetypes.StringValue, was: %T`, anycastIpv4poolAttribute))
+	}
+
+	modeAttribute, ok := attributes["mode"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`mode is missing from object`)
+
+		return NewVtepValueUnknown(), diags
+	}
+
+	modeVal, ok := modeAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`mode expected to be basetypes.StringValue, was: %T`, modeAttribute))
+	}
+
+	if diags.HasError() {
+		return NewVtepValueUnknown(), diags
+	}
+
+	return VtepValue{
+		AnycastIpv4pool: anycastIpv4poolVal,
+		Mode:            modeVal,
+		state:           attr.ValueStateKnown,
+	}, diags
+}
+
+func NewVtepValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) VtepValue {
+	object, diags := NewVtepValue(attributeTypes, attributes)
+
+	if diags.HasError() {
+		// This could potentially be added to the diag package.
+		diagsStrings := make([]string, 0, len(diags))
+
+		for _, diagnostic := range diags {
+			diagsStrings = append(diagsStrings, fmt.Sprintf(
+				"%s | %s | %s",
+				diagnostic.Severity(),
+				diagnostic.Summary(),
+				diagnostic.Detail()))
+		}
+
+		panic("NewVtepValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
+	}
+
+	return object
+}
+
+func (t VtepType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
+	if in.Type() == nil {
+		return NewVtepValueNull(), nil
+	}
+
+	if !in.Type().Equal(t.TerraformType(ctx)) {
+		return nil, fmt.Errorf("expected %s, got %s", t.TerraformType(ctx), in.Type())
+	}
+
+	if !in.IsKnown() {
+		return NewVtepValueUnknown(), nil
+	}
+
+	if in.IsNull() {
+		return NewVtepValueNull(), nil
+	}
+
+	attributes := map[string]attr.Value{}
+
+	val := map[string]tftypes.Value{}
+
+	err := in.As(&val)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for k, v := range val {
+		a, err := t.AttrTypes[k].ValueFromTerraform(ctx, v)
+
+		if err != nil {
+			return nil, err
+		}
+
+		attributes[k] = a
+	}
+
+	return NewVtepValueMust(VtepValue{}.AttributeTypes(ctx), attributes), nil
+}
+
+func (t VtepType) ValueType(ctx context.Context) attr.Value {
+	return VtepValue{}
+}
+
+var _ basetypes.ObjectValuable = VtepValue{}
+
+type VtepValue struct {
+	AnycastIpv4pool basetypes.StringValue `tfsdk:"anycast_ipv4pool"`
+	Mode            basetypes.StringValue `tfsdk:"mode"`
+	state           attr.ValueState
+}
+
+func (v VtepValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+	attrTypes := make(map[string]tftypes.Type, 2)
+
+	var val tftypes.Value
+	var err error
+
+	attrTypes["anycast_ipv4pool"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["mode"] = basetypes.StringType{}.TerraformType(ctx)
+
+	objectType := tftypes.Object{AttributeTypes: attrTypes}
+
+	switch v.state {
+	case attr.ValueStateKnown:
+		vals := make(map[string]tftypes.Value, 2)
+
+		val, err = v.AnycastIpv4pool.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["anycast_ipv4pool"] = val
+
+		val, err = v.Mode.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["mode"] = val
+
+		if err := tftypes.ValidateValue(objectType, vals); err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		return tftypes.NewValue(objectType, vals), nil
+	case attr.ValueStateNull:
+		return tftypes.NewValue(objectType, nil), nil
+	case attr.ValueStateUnknown:
+		return tftypes.NewValue(objectType, tftypes.UnknownValue), nil
+	default:
+		panic(fmt.Sprintf("unhandled Object state in ToTerraformValue: %s", v.state))
+	}
+}
+
+func (v VtepValue) IsNull() bool {
+	return v.state == attr.ValueStateNull
+}
+
+func (v VtepValue) IsUnknown() bool {
+	return v.state == attr.ValueStateUnknown
+}
+
+func (v VtepValue) String() string {
+	return "VtepValue"
+}
+
+func (v VtepValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	attributeTypes := map[string]attr.Type{
+		"anycast_ipv4pool": basetypes.StringType{},
+		"mode":             basetypes.StringType{},
+	}
+
+	if v.IsNull() {
+		return types.ObjectNull(attributeTypes), diags
+	}
+
+	if v.IsUnknown() {
+		return types.ObjectUnknown(attributeTypes), diags
+	}
+
+	objVal, diags := types.ObjectValue(
+		attributeTypes,
+		map[string]attr.Value{
+			"anycast_ipv4pool": v.AnycastIpv4pool,
+			"mode":             v.Mode,
+		})
+
+	return objVal, diags
+}
+
+func (v VtepValue) Equal(o attr.Value) bool {
+	other, ok := o.(VtepValue)
+
+	if !ok {
+		return false
+	}
+
+	if v.state != other.state {
+		return false
+	}
+
+	if v.state != attr.ValueStateKnown {
+		return true
+	}
+
+	if !v.AnycastIpv4pool.Equal(other.AnycastIpv4pool) {
+		return false
+	}
+
+	if !v.Mode.Equal(other.Mode) {
+		return false
+	}
+
+	return true
+}
+
+func (v VtepValue) Type(ctx context.Context) attr.Type {
+	return VtepType{
+		basetypes.ObjectType{
+			AttrTypes: v.AttributeTypes(ctx),
+		},
+	}
+}
+
+func (v VtepValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
+	return map[string]attr.Type{
+		"anycast_ipv4pool": basetypes.StringType{},
+		"mode":             basetypes.StringType{},
 	}
 }
 
@@ -10381,6 +10874,24 @@ func (t Members1Type) ValueFromObject(ctx context.Context, in basetypes.ObjectVa
 			fmt.Sprintf(`last_change expected to be basetypes.StringValue, was: %T`, lastChangeAttribute))
 	}
 
+	lldpOperationalStateAttribute, ok := attributes["lldp_operational_state"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`lldp_operational_state is missing from object`)
+
+		return nil, diags
+	}
+
+	lldpOperationalStateVal, ok := lldpOperationalStateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`lldp_operational_state expected to be basetypes.StringValue, was: %T`, lldpOperationalStateAttribute))
+	}
+
 	neighborsAttribute, ok := attributes["neighbors"]
 
 	if !ok {
@@ -10453,6 +10964,24 @@ func (t Members1Type) ValueFromObject(ctx context.Context, in basetypes.ObjectVa
 			fmt.Sprintf(`operational_state expected to be basetypes.StringValue, was: %T`, operationalStateAttribute))
 	}
 
+	operationalStateReasonAttribute, ok := attributes["operational_state_reason"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_state_reason is missing from object`)
+
+		return nil, diags
+	}
+
+	operationalStateReasonVal, ok := operationalStateReasonAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_state_reason expected to be basetypes.StringValue, was: %T`, operationalStateReasonAttribute))
+	}
+
 	speedAttribute, ok := attributes["speed"]
 
 	if !ok {
@@ -10476,15 +11005,17 @@ func (t Members1Type) ValueFromObject(ctx context.Context, in basetypes.ObjectVa
 	}
 
 	return Members1Value{
-		Enabled:          enabledVal,
-		Interface:        interfaceVal,
-		LastChange:       lastChangeVal,
-		Neighbors:        neighborsVal,
-		Node:             nodeVal,
-		NodeInterface:    nodeInterfaceVal,
-		OperationalState: operationalStateVal,
-		Speed:            speedVal,
-		state:            attr.ValueStateKnown,
+		Enabled:                enabledVal,
+		Interface:              interfaceVal,
+		LastChange:             lastChangeVal,
+		LldpOperationalState:   lldpOperationalStateVal,
+		Neighbors:              neighborsVal,
+		Node:                   nodeVal,
+		NodeInterface:          nodeInterfaceVal,
+		OperationalState:       operationalStateVal,
+		OperationalStateReason: operationalStateReasonVal,
+		Speed:                  speedVal,
+		state:                  attr.ValueStateKnown,
 	}, diags
 }
 
@@ -10605,6 +11136,24 @@ func NewMembers1Value(attributeTypes map[string]attr.Type, attributes map[string
 			fmt.Sprintf(`last_change expected to be basetypes.StringValue, was: %T`, lastChangeAttribute))
 	}
 
+	lldpOperationalStateAttribute, ok := attributes["lldp_operational_state"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`lldp_operational_state is missing from object`)
+
+		return NewMembers1ValueUnknown(), diags
+	}
+
+	lldpOperationalStateVal, ok := lldpOperationalStateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`lldp_operational_state expected to be basetypes.StringValue, was: %T`, lldpOperationalStateAttribute))
+	}
+
 	neighborsAttribute, ok := attributes["neighbors"]
 
 	if !ok {
@@ -10677,6 +11226,24 @@ func NewMembers1Value(attributeTypes map[string]attr.Type, attributes map[string
 			fmt.Sprintf(`operational_state expected to be basetypes.StringValue, was: %T`, operationalStateAttribute))
 	}
 
+	operationalStateReasonAttribute, ok := attributes["operational_state_reason"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_state_reason is missing from object`)
+
+		return NewMembers1ValueUnknown(), diags
+	}
+
+	operationalStateReasonVal, ok := operationalStateReasonAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_state_reason expected to be basetypes.StringValue, was: %T`, operationalStateReasonAttribute))
+	}
+
 	speedAttribute, ok := attributes["speed"]
 
 	if !ok {
@@ -10700,15 +11267,17 @@ func NewMembers1Value(attributeTypes map[string]attr.Type, attributes map[string
 	}
 
 	return Members1Value{
-		Enabled:          enabledVal,
-		Interface:        interfaceVal,
-		LastChange:       lastChangeVal,
-		Neighbors:        neighborsVal,
-		Node:             nodeVal,
-		NodeInterface:    nodeInterfaceVal,
-		OperationalState: operationalStateVal,
-		Speed:            speedVal,
-		state:            attr.ValueStateKnown,
+		Enabled:                enabledVal,
+		Interface:              interfaceVal,
+		LastChange:             lastChangeVal,
+		LldpOperationalState:   lldpOperationalStateVal,
+		Neighbors:              neighborsVal,
+		Node:                   nodeVal,
+		NodeInterface:          nodeInterfaceVal,
+		OperationalState:       operationalStateVal,
+		OperationalStateReason: operationalStateReasonVal,
+		Speed:                  speedVal,
+		state:                  attr.ValueStateKnown,
 	}, diags
 }
 
@@ -10780,19 +11349,21 @@ func (t Members1Type) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = Members1Value{}
 
 type Members1Value struct {
-	Enabled          basetypes.BoolValue   `tfsdk:"enabled"`
-	Interface        basetypes.StringValue `tfsdk:"interface"`
-	LastChange       basetypes.StringValue `tfsdk:"last_change"`
-	Neighbors        basetypes.ListValue   `tfsdk:"neighbors"`
-	Node             basetypes.StringValue `tfsdk:"node"`
-	NodeInterface    basetypes.StringValue `tfsdk:"node_interface"`
-	OperationalState basetypes.StringValue `tfsdk:"operational_state"`
-	Speed            basetypes.StringValue `tfsdk:"speed"`
-	state            attr.ValueState
+	Enabled                basetypes.BoolValue   `tfsdk:"enabled"`
+	Interface              basetypes.StringValue `tfsdk:"interface"`
+	LastChange             basetypes.StringValue `tfsdk:"last_change"`
+	LldpOperationalState   basetypes.StringValue `tfsdk:"lldp_operational_state"`
+	Neighbors              basetypes.ListValue   `tfsdk:"neighbors"`
+	Node                   basetypes.StringValue `tfsdk:"node"`
+	NodeInterface          basetypes.StringValue `tfsdk:"node_interface"`
+	OperationalState       basetypes.StringValue `tfsdk:"operational_state"`
+	OperationalStateReason basetypes.StringValue `tfsdk:"operational_state_reason"`
+	Speed                  basetypes.StringValue `tfsdk:"speed"`
+	state                  attr.ValueState
 }
 
 func (v Members1Value) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 8)
+	attrTypes := make(map[string]tftypes.Type, 10)
 
 	var val tftypes.Value
 	var err error
@@ -10800,19 +11371,21 @@ func (v Members1Value) ToTerraformValue(ctx context.Context) (tftypes.Value, err
 	attrTypes["enabled"] = basetypes.BoolType{}.TerraformType(ctx)
 	attrTypes["interface"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["last_change"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["lldp_operational_state"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["neighbors"] = basetypes.ListType{
 		ElemType: NeighborsValue{}.Type(ctx),
 	}.TerraformType(ctx)
 	attrTypes["node"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["node_interface"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["operational_state"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["operational_state_reason"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["speed"] = basetypes.StringType{}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 8)
+		vals := make(map[string]tftypes.Value, 10)
 
 		val, err = v.Enabled.ToTerraformValue(ctx)
 
@@ -10837,6 +11410,14 @@ func (v Members1Value) ToTerraformValue(ctx context.Context) (tftypes.Value, err
 		}
 
 		vals["last_change"] = val
+
+		val, err = v.LldpOperationalState.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["lldp_operational_state"] = val
 
 		val, err = v.Neighbors.ToTerraformValue(ctx)
 
@@ -10869,6 +11450,14 @@ func (v Members1Value) ToTerraformValue(ctx context.Context) (tftypes.Value, err
 		}
 
 		vals["operational_state"] = val
+
+		val, err = v.OperationalStateReason.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["operational_state_reason"] = val
 
 		val, err = v.Speed.ToTerraformValue(ctx)
 
@@ -10937,16 +11526,18 @@ func (v Members1Value) ToObjectValue(ctx context.Context) (basetypes.ObjectValue
 	}
 
 	attributeTypes := map[string]attr.Type{
-		"enabled":     basetypes.BoolType{},
-		"interface":   basetypes.StringType{},
-		"last_change": basetypes.StringType{},
+		"enabled":                basetypes.BoolType{},
+		"interface":              basetypes.StringType{},
+		"last_change":            basetypes.StringType{},
+		"lldp_operational_state": basetypes.StringType{},
 		"neighbors": basetypes.ListType{
 			ElemType: NeighborsValue{}.Type(ctx),
 		},
-		"node":              basetypes.StringType{},
-		"node_interface":    basetypes.StringType{},
-		"operational_state": basetypes.StringType{},
-		"speed":             basetypes.StringType{},
+		"node":                     basetypes.StringType{},
+		"node_interface":           basetypes.StringType{},
+		"operational_state":        basetypes.StringType{},
+		"operational_state_reason": basetypes.StringType{},
+		"speed":                    basetypes.StringType{},
 	}
 
 	if v.IsNull() {
@@ -10960,14 +11551,16 @@ func (v Members1Value) ToObjectValue(ctx context.Context) (basetypes.ObjectValue
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"enabled":           v.Enabled,
-			"interface":         v.Interface,
-			"last_change":       v.LastChange,
-			"neighbors":         neighbors,
-			"node":              v.Node,
-			"node_interface":    v.NodeInterface,
-			"operational_state": v.OperationalState,
-			"speed":             v.Speed,
+			"enabled":                  v.Enabled,
+			"interface":                v.Interface,
+			"last_change":              v.LastChange,
+			"lldp_operational_state":   v.LldpOperationalState,
+			"neighbors":                neighbors,
+			"node":                     v.Node,
+			"node_interface":           v.NodeInterface,
+			"operational_state":        v.OperationalState,
+			"operational_state_reason": v.OperationalStateReason,
+			"speed":                    v.Speed,
 		})
 
 	return objVal, diags
@@ -11000,6 +11593,10 @@ func (v Members1Value) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.LldpOperationalState.Equal(other.LldpOperationalState) {
+		return false
+	}
+
 	if !v.Neighbors.Equal(other.Neighbors) {
 		return false
 	}
@@ -11013,6 +11610,10 @@ func (v Members1Value) Equal(o attr.Value) bool {
 	}
 
 	if !v.OperationalState.Equal(other.OperationalState) {
+		return false
+	}
+
+	if !v.OperationalStateReason.Equal(other.OperationalStateReason) {
 		return false
 	}
 
@@ -11033,16 +11634,18 @@ func (v Members1Value) Type(ctx context.Context) attr.Type {
 
 func (v Members1Value) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"enabled":     basetypes.BoolType{},
-		"interface":   basetypes.StringType{},
-		"last_change": basetypes.StringType{},
+		"enabled":                basetypes.BoolType{},
+		"interface":              basetypes.StringType{},
+		"last_change":            basetypes.StringType{},
+		"lldp_operational_state": basetypes.StringType{},
 		"neighbors": basetypes.ListType{
 			ElemType: NeighborsValue{}.Type(ctx),
 		},
-		"node":              basetypes.StringType{},
-		"node_interface":    basetypes.StringType{},
-		"operational_state": basetypes.StringType{},
-		"speed":             basetypes.StringType{},
+		"node":                     basetypes.StringType{},
+		"node_interface":           basetypes.StringType{},
+		"operational_state":        basetypes.StringType{},
+		"operational_state_reason": basetypes.StringType{},
+		"speed":                    basetypes.StringType{},
 	}
 }
 

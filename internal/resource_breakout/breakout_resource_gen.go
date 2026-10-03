@@ -136,18 +136,21 @@ func BreakoutResourceSchema(ctx context.Context) schema.Schema {
 					"interfaces": schema.ListAttribute{
 						ElementType:         types.StringType,
 						Optional:            true,
+						Computed:            true,
 						Description:         "A list of normalized parent interface/port.",
 						MarkdownDescription: "A list of normalized parent interface/port.",
 					},
 					"node_selectors": schema.ListAttribute{
 						ElementType:         types.StringType,
 						Optional:            true,
+						Computed:            true,
 						Description:         "Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.",
 						MarkdownDescription: "Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.",
 					},
 					"nodes": schema.ListAttribute{
 						ElementType:         types.StringType,
 						Optional:            true,
+						Computed:            true,
 						Description:         "Reference to a list of TopoNodes where the parent interfaces are to be broken out.",
 						MarkdownDescription: "Reference to a list of TopoNodes where the parent interfaces are to be broken out.",
 					},

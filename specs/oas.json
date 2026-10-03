@@ -84,9 +84,7 @@
             "type": "string"
           },
           "values": {
-            "additionalProperties": {
-              "type": "object"
-            },
+            "additionalProperties": true,
             "description": "Associated data/information.\nThe error \"message\" may contain {{name}} escapes that should be substituted with information from this dictionary.\n\nNote that this map MUST NOT contain JSON objects (`{...}`) or arrays (`[...]`), only simple JSON types are permitted.",
             "type": "object"
           }
@@ -149,6 +147,10 @@
           "x-permissive": {
             "description": "For an \"add\" operation, an already-present field referenced by the \"path\" will\nresult in an error unless this field is true.  Similarly for a non-existent\ntarget field of a \"remove\" operation.",
             "type": "boolean"
+          },
+          "x-ui-annotation": {
+            "description": "Metadata maintained in support of the EDA UI.  External use not recommended.",
+            "type": "string"
           }
         },
         "required": [
@@ -581,10 +583,16 @@
           "endpoint_a_name": {
             "type": "string"
           },
+          "endpoint_a_namespace": {
+            "type": "string"
+          },
           "endpoint_b": {
             "$ref": "#/components/schemas/TopoOverlayEndpoint"
           },
           "endpoint_b_name": {
+            "type": "string"
+          },
+          "endpoint_b_namespace": {
             "type": "string"
           },
           "group_key": {
@@ -1012,6 +1020,7 @@
             "properties": {
               "channels": {
                 "description": "The number of breakout channels to create.",
+                "format": "int32",
                 "maximum": 8,
                 "minimum": 1,
                 "title": "Number of Channels",
@@ -1152,6 +1161,10 @@
             "format": "date-time",
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "commitTime"
+              },
               "ui-order-priority": 50,
               "ui-title": "Commit Time",
               "ui-title-key": "commitTime"
@@ -1160,6 +1173,10 @@
           "hash": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "commitHash"
+              },
               "ui-order-priority": 40,
               "ui-title": "Commit Hash",
               "ui-title-key": "commitHash"
@@ -1168,6 +1185,14 @@
           "name": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "name"
+              },
+              "key": {
+                "index": 2,
+                "is-name": true
+              },
               "ui-order-priority": 10,
               "ui-title": "Name",
               "ui-title-key": "name"
@@ -1176,6 +1201,14 @@
           "namespace": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "namespace"
+              },
+              "key": {
+                "index": 1,
+                "is-namespace": true
+              },
               "ui-order-priority": 20,
               "ui-title": "Namespace",
               "ui-title-key": "namespace"
@@ -1185,6 +1218,10 @@
             "format": "uint64",
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "transactionId"
+              },
               "ui-order-priority": 30,
               "ui-title": "Transaction ID",
               "ui-title-key": "transactionId"
@@ -1206,6 +1243,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.critical"
+              },
               "ui-title": "Critical",
               "ui-title-key": "alarm_severities.critical"
             }
@@ -1215,6 +1255,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.major"
+              },
               "ui-title": "Major",
               "ui-title-key": "alarm_severities.major"
             }
@@ -1224,6 +1267,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.minor"
+              },
               "ui-title": "minor",
               "ui-title-key": "alarm_severities.minor"
             }
@@ -1233,6 +1279,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.warning"
+              },
               "ui-title": "Warning",
               "ui-title-key": "alarm_severities.warning"
             }
@@ -1241,6 +1290,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "alarms"
+          },
           "ui-order-priority": 40,
           "ui-title": "Alarms",
           "ui-title-key": "alarms"
@@ -1253,6 +1306,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "count_column"
+              },
               "ui-title": "Count",
               "ui-title-key": "count_column"
             }
@@ -1261,6 +1317,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "deviations"
+          },
           "ui-order-priority": 50,
           "ui-title": "Deviations",
           "ui-title-key": "deviations"
@@ -1274,6 +1334,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "annotations"
+              },
               "ui-order-priority": 40,
               "ui-title": "Annotations",
               "ui-title-key": "annotations"
@@ -1285,6 +1348,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "labels"
+              },
               "ui-auto-completes": [
                 {
                   "condition": "true",
@@ -1304,7 +1370,15 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$",
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "name"
+              },
               "immutable": true,
+              "key": {
+                "index": 2,
+                "is-mirror": true,
+                "is-name": true
+              },
               "ui-order-priority": 10,
               "ui-pattern-error": "A valid name is made up of one or more components where each component is separated by period characters.  Each component must start and end with a lower case alphanumeric character and the body of the component is made up of zero or more lower case alphanumeric and hyphen characters.",
               "ui-title": "Name",
@@ -1314,7 +1388,15 @@
           "namespace": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "namespace"
+              },
               "immutable": true,
+              "key": {
+                "index": 1,
+                "is-mirror": true,
+                "is-namespace": true
+              },
               "ui-order-priority": 20,
               "ui-title": "Namespace",
               "ui-title-key": "namespace"
@@ -1327,6 +1409,10 @@
         ],
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "metadata"
+          },
           "ui-order-priority": 10,
           "ui-title": "Metadata",
           "ui-title-key": "metadata"
@@ -1490,16 +1576,19 @@
                       "properties": {
                         "down": {
                           "description": "Number of interfaces that failed one or more checks.",
+                          "format": "int64",
                           "title": "Down Interfaces",
                           "type": "integer"
                         },
                         "total": {
                           "description": "Total number of interfaces checked.",
+                          "format": "int64",
                           "title": "Total Interfaces",
                           "type": "integer"
                         },
                         "up": {
                           "description": "Number of interfaces that passed all checks.",
+                          "format": "int64",
                           "title": "Up Interfaces",
                           "type": "integer"
                         }
@@ -1558,13 +1647,29 @@
                                 "type": "boolean",
                                 "x-eda-nokia-com": {
                                   "ui-column-span": 2,
-                                  "ui-order-priority": 300
+                                  "ui-order-priority": 300,
+                                  "ui-render": [
+                                    {
+                                      "color": "kpi_info",
+                                      "condition": "field===true",
+                                      "icon": "ToggleOn",
+                                      "text": "True"
+                                    },
+                                    {
+                                      "color": "kpi_disabled",
+                                      "condition": "field===false",
+                                      "icon": "ToggleOff",
+                                      "text": "False"
+                                    }
+                                  ]
                                 }
                               },
                               "lag": {
                                 "properties": {
                                   "adminKey": {
                                     "description": "LACP Admin Key.",
+                                    "format": "int32",
+                                    "maximum": 65535,
                                     "title": "Admin Key",
                                     "type": "integer",
                                     "x-eda-nokia-com": {
@@ -1602,7 +1707,23 @@
                                     "enabled": {
                                       "description": "The administrative status of this member.",
                                       "title": "Enabled",
-                                      "type": "boolean"
+                                      "type": "boolean",
+                                      "x-eda-nokia-com": {
+                                        "ui-render": [
+                                          {
+                                            "color": "kpi_info",
+                                            "condition": "field===true",
+                                            "icon": "ToggleOn",
+                                            "text": "True"
+                                          },
+                                          {
+                                            "color": "kpi_disabled",
+                                            "condition": "field===false",
+                                            "icon": "ToggleOff",
+                                            "text": "False"
+                                          }
+                                        ]
+                                      }
                                     },
                                     "interface": {
                                       "description": "The name of the interface in normalized format.",
@@ -1615,17 +1736,29 @@
                                       "title": "Last Change",
                                       "type": "string"
                                     },
+                                    "lldpOperationalState": {
+                                      "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+                                      "enum": [
+                                        "Aligned",
+                                        "Misaligned",
+                                        "Present",
+                                        "NotPresent",
+                                        "N/A"
+                                      ],
+                                      "title": "LLDP Operational State",
+                                      "type": "string"
+                                    },
                                     "neighbors": {
                                       "description": "List of discovered neighbors on this member.",
                                       "items": {
                                         "properties": {
                                           "interface": {
-                                            "description": "The name of a neighbor interface of this member in node specific format.",
+                                            "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
                                             "title": "Interface",
                                             "type": "string"
                                           },
                                           "node": {
-                                            "description": "The name of a neighbor node of this member in node specific format.",
+                                            "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
                                             "title": "Node",
                                             "type": "string"
                                           }
@@ -1655,7 +1788,50 @@
                                         "N/A"
                                       ],
                                       "title": "Operational State",
-                                      "type": "string"
+                                      "type": "string",
+                                      "x-eda-nokia-com": {
+                                        "ui-render": [
+                                          {
+                                            "color": "kpi_success",
+                                            "condition": "field===\"Up\"",
+                                            "icon": "ArrowUpCircle"
+                                          },
+                                          {
+                                            "color": "kpi_major",
+                                            "condition": "field===\"Degraded\"",
+                                            "icon": "AlarmCircle"
+                                          },
+                                          {
+                                            "color": "kpi_critical",
+                                            "condition": "field===\"Down\"",
+                                            "icon": "ArrowDownCircle"
+                                          },
+                                          {
+                                            "color": "kpi_warning",
+                                            "condition": "field===\"Unknown\"",
+                                            "icon": "RemoveCircle"
+                                          },
+                                          {
+                                            "color": "kpi_neutral",
+                                            "condition": "field===\"N/A\"",
+                                            "icon": "RemoveCircle"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "operationalStateReason": {
+                                      "description": "Indicates the reason for the operational state. Currently only used when the state is Down.",
+                                      "enum": [
+                                        "Standby",
+                                        "Other",
+                                        "Lower Layer Down"
+                                      ],
+                                      "title": "Operational State Reason",
+                                      "type": "string",
+                                      "x-eda-nokia-com": {
+                                        "ui-column-span": 2,
+                                        "ui-order-priority": 200
+                                      }
                                     },
                                     "speed": {
                                       "description": "Indicates the operational speed of the member.",
@@ -1687,7 +1863,34 @@
                                 "type": "string",
                                 "x-eda-nokia-com": {
                                   "ui-column-span": 2,
-                                  "ui-order-priority": 100
+                                  "ui-order-priority": 100,
+                                  "ui-render": [
+                                    {
+                                      "color": "kpi_success",
+                                      "condition": "field===\"Up\"",
+                                      "icon": "ArrowUpCircle"
+                                    },
+                                    {
+                                      "color": "kpi_major",
+                                      "condition": "field===\"Degraded\"",
+                                      "icon": "AlarmCircle"
+                                    },
+                                    {
+                                      "color": "kpi_critical",
+                                      "condition": "field===\"Down\"",
+                                      "icon": "ArrowDownCircle"
+                                    },
+                                    {
+                                      "color": "kpi_warning",
+                                      "condition": "field===\"Unknown\"",
+                                      "icon": "RemoveCircle"
+                                    },
+                                    {
+                                      "color": "kpi_neutral",
+                                      "condition": "field===\"N/A\"",
+                                      "icon": "RemoveCircle"
+                                    }
+                                  ]
                                 }
                               },
                               "speed": {
@@ -1745,6 +1948,11 @@
                 ],
                 "title": "Result",
                 "type": "string"
+              },
+              "summary": {
+                "description": "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text).",
+                "title": "Summary",
+                "type": "string"
               }
             },
             "readOnly": true,
@@ -1792,6 +2000,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.critical"
+              },
               "ui-title": "Critical",
               "ui-title-key": "alarm_severities.critical"
             }
@@ -1801,6 +2012,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.major"
+              },
               "ui-title": "Major",
               "ui-title-key": "alarm_severities.major"
             }
@@ -1810,6 +2024,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.minor"
+              },
               "ui-title": "minor",
               "ui-title-key": "alarm_severities.minor"
             }
@@ -1819,6 +2036,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.warning"
+              },
               "ui-title": "Warning",
               "ui-title-key": "alarm_severities.warning"
             }
@@ -1827,6 +2047,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "alarms"
+          },
           "ui-order-priority": 40,
           "ui-title": "Alarms",
           "ui-title-key": "alarms"
@@ -1839,6 +2063,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "count_column"
+              },
               "ui-title": "Count",
               "ui-title-key": "count_column"
             }
@@ -1847,6 +2074,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "deviations"
+          },
           "ui-order-priority": 50,
           "ui-title": "Deviations",
           "ui-title-key": "deviations"
@@ -1860,6 +2091,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "annotations"
+              },
               "ui-order-priority": 40,
               "ui-title": "Annotations",
               "ui-title-key": "annotations"
@@ -1871,6 +2105,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "labels"
+              },
               "ui-auto-completes": [
                 {
                   "condition": "true",
@@ -1890,7 +2127,15 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$",
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "name"
+              },
               "immutable": true,
+              "key": {
+                "index": 2,
+                "is-mirror": true,
+                "is-name": true
+              },
               "ui-order-priority": 10,
               "ui-pattern-error": "A valid name is made up of one or more components where each component is separated by period characters.  Each component must start and end with a lower case alphanumeric character and the body of the component is made up of zero or more lower case alphanumeric and hyphen characters.",
               "ui-title": "Name",
@@ -1900,7 +2145,15 @@
           "namespace": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "namespace"
+              },
               "immutable": true,
+              "key": {
+                "index": 1,
+                "is-mirror": true,
+                "is-namespace": true
+              },
               "ui-order-priority": 20,
               "ui-title": "Namespace",
               "ui-title-key": "namespace"
@@ -1913,6 +2166,10 @@
         ],
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "metadata"
+          },
           "ui-order-priority": 10,
           "ui-title": "Metadata",
           "ui-title-key": "metadata"
@@ -1956,7 +2213,21 @@
                 "title": "DDM",
                 "type": "boolean",
                 "x-eda-nokia-com": {
-                  "ui-order-priority": 800
+                  "ui-order-priority": 800,
+                  "ui-render": [
+                    {
+                      "color": "kpi_info",
+                      "condition": "field===true",
+                      "icon": "ToggleOn",
+                      "text": "True"
+                    },
+                    {
+                      "color": "kpi_disabled",
+                      "condition": "field===false",
+                      "icon": "ToggleOff",
+                      "text": "False"
+                    }
+                  ]
                 }
               },
               "description": {
@@ -1975,7 +2246,21 @@
                 "type": "boolean",
                 "x-eda-nokia-com": {
                   "ui-column-span": 1,
-                  "ui-order-priority": 100
+                  "ui-order-priority": 100,
+                  "ui-render": [
+                    {
+                      "color": "kpi_info",
+                      "condition": "field===true",
+                      "icon": "ToggleOn",
+                      "text": "True"
+                    },
+                    {
+                      "color": "kpi_disabled",
+                      "condition": "field===false",
+                      "icon": "ToggleOff",
+                      "text": "False"
+                    }
+                  ]
                 }
               },
               "encapType": {
@@ -2004,7 +2289,21 @@
                         "type": "boolean",
                         "x-eda-nokia-com": {
                           "ui-column-span": 1,
-                          "ui-order-priority": 1800
+                          "ui-order-priority": 1800,
+                          "ui-render": [
+                            {
+                              "color": "kpi_info",
+                              "condition": "field===true",
+                              "icon": "ToggleOn",
+                              "text": "True"
+                            },
+                            {
+                              "color": "kpi_disabled",
+                              "condition": "field===false",
+                              "icon": "ToggleOff",
+                              "text": "False"
+                            }
+                          ]
                         }
                       },
                       "signalDegrade": {
@@ -2012,6 +2311,7 @@
                         "properties": {
                           "exponent": {
                             "description": "Threshold exponent for the signal degrade condition.",
+                            "format": "int32",
                             "maximum": 9,
                             "minimum": 1,
                             "title": "Threshold Exponent",
@@ -2023,6 +2323,7 @@
                           },
                           "multiplier": {
                             "description": "Threshold multiplier for the signal degrade condition.",
+                            "format": "int32",
                             "maximum": 9,
                             "minimum": 1,
                             "title": "Threshold Multiplier",
@@ -2047,6 +2348,7 @@
                         "properties": {
                           "exponent": {
                             "description": "Threshold exponent for the signal failure condition.",
+                            "format": "int32",
                             "maximum": 9,
                             "minimum": 1,
                             "title": "Threshold Exponent",
@@ -2058,6 +2360,7 @@
                           },
                           "multiplier": {
                             "description": "Threshold multiplier for the signal failure condition.",
+                            "format": "int32",
                             "maximum": 9,
                             "minimum": 1,
                             "title": "Threshold Multiplier",
@@ -2079,6 +2382,8 @@
                       },
                       "windowSizeSeconds": {
                         "description": "Sliding window size over which CRC errors are measured, in number of seconds.",
+                        "format": "int32",
+                        "maximum": 65535,
                         "minimum": 1,
                         "title": "Window Size",
                         "type": "integer",
@@ -2152,6 +2457,7 @@
                   },
                   "reloadDelayTimerSeconds": {
                     "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established.",
+                    "format": "int32",
                     "maximum": 86400,
                     "minimum": 1,
                     "title": "Reload Delay Timer",
@@ -2216,7 +2522,21 @@
                         "type": "boolean",
                         "x-eda-nokia-com": {
                           "ui-column-span": 1,
-                          "ui-order-priority": 1800
+                          "ui-order-priority": 1800,
+                          "ui-render": [
+                            {
+                              "color": "kpi_info",
+                              "condition": "field===true",
+                              "icon": "ToggleOn",
+                              "text": "True"
+                            },
+                            {
+                              "color": "kpi_disabled",
+                              "condition": "field===false",
+                              "icon": "ToggleOff",
+                              "text": "False"
+                            }
+                          ]
                         }
                       },
                       "multicastRate": {
@@ -2248,6 +2568,7 @@
                       },
                       "unknownUnicastRate": {
                         "description": "Sets the maximum rate allowed for ingress unknown unicast frames on the interface.",
+                        "format": "int32",
                         "maximum": 100000000,
                         "minimum": 0,
                         "title": "Unknown Unicast Rate",
@@ -2301,6 +2622,7 @@
                     "properties": {
                       "adminKey": {
                         "description": "Configure the LACP admin-key to be advertised by the local system.",
+                        "format": "int32",
                         "maximum": 65535,
                         "minimum": 1,
                         "title": "Admin Key",
@@ -2344,6 +2666,7 @@
                           "timeoutSeconds": {
                             "default": 60,
                             "description": "Specifies the LACP-fallback timeout interval in seconds. [default=60]",
+                            "format": "int32",
                             "maximum": 3600,
                             "minimum": 4,
                             "title": "Timeout",
@@ -2390,6 +2713,7 @@
                       "systemPriority": {
                         "default": 32768,
                         "description": "System priority used by the Node on this LAG interface. Lower value is higher priority for determining which Node is the controlling system.[default=32768]",
+                        "format": "int32",
                         "maximum": 65535,
                         "minimum": 0,
                         "title": "System Priority",
@@ -2410,6 +2734,7 @@
                   "minLinks": {
                     "default": 1,
                     "description": "The min-link threshold specifies the minimum number of member links that must be active in order for the LAG to be operationally up. If the number of active links falls below this threshold, the entire LAG is brought operationally down.[default=1]",
+                    "format": "int32",
                     "maximum": 64,
                     "minimum": 1,
                     "title": "Minimum Links",
@@ -2472,6 +2797,7 @@
                       "reloadDelayTimerSeconds": {
                         "default": 100,
                         "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]",
+                        "format": "int32",
                         "maximum": 86400,
                         "minimum": 1,
                         "title": "Reload Delay Timer",
@@ -2488,7 +2814,69 @@
                         "type": "boolean",
                         "x-eda-nokia-com": {
                           "ui-column-span": 1,
-                          "ui-order-priority": 3600
+                          "ui-order-priority": 3600,
+                          "ui-render": [
+                            {
+                              "color": "kpi_info",
+                              "condition": "field===true",
+                              "icon": "ToggleOn",
+                              "text": "True"
+                            },
+                            {
+                              "color": "kpi_disabled",
+                              "condition": "field===false",
+                              "icon": "ToggleOff",
+                              "text": "False"
+                            }
+                          ]
+                        }
+                      },
+                      "vtep": {
+                        "default": {
+                          "mode": "Unicast"
+                        },
+                        "description": "VTEP mode configuration for the Multi-homed Ethernet Segment.",
+                        "properties": {
+                          "anycastIPv4Pool": {
+                            "description": "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast.",
+                            "title": "Anycast IPv4 Pool",
+                            "type": "string",
+                            "x-eda-nokia-com": {
+                              "ui-auto-completes": [
+                                {
+                                  "condition": "true",
+                                  "group": "core.eda.nokia.com",
+                                  "resource": "ipallocationpools",
+                                  "type": "gvr"
+                                }
+                              ],
+                              "ui-column-span": 2,
+                              "ui-order-priority": 4001,
+                              "ui-visible-if": "self.mode === \"Anycast\""
+                            }
+                          },
+                          "mode": {
+                            "default": "Unicast",
+                            "description": "VTEP mode for the Multi-homed Ethernet Segment.",
+                            "enum": [
+                              "Unicast",
+                              "Anycast"
+                            ],
+                            "title": "Mode",
+                            "type": "string",
+                            "x-eda-nokia-com": {
+                              "ui-column-span": 2,
+                              "ui-order-priority": 4000
+                            }
+                          }
+                        },
+                        "title": "VTEP",
+                        "type": "object",
+                        "x-eda-nokia-com": {
+                          "ui-column-span": 2,
+                          "ui-order-priority": 4000,
+                          "ui-presence-default": true,
+                          "ui-visible-if": "self.mode === \"AllActive\""
                         }
                       }
                     },
@@ -2527,7 +2915,21 @@
                 "type": "boolean",
                 "x-eda-nokia-com": {
                   "ui-column-span": 2,
-                  "ui-order-priority": 350
+                  "ui-order-priority": 350,
+                  "ui-render": [
+                    {
+                      "color": "kpi_info",
+                      "condition": "field===true",
+                      "icon": "ToggleOn",
+                      "text": "True"
+                    },
+                    {
+                      "color": "kpi_disabled",
+                      "condition": "field===false",
+                      "icon": "ToggleOff",
+                      "text": "False"
+                    }
+                  ]
                 }
               },
               "members": {
@@ -2560,7 +2962,21 @@
                       "type": "boolean",
                       "x-eda-nokia-com": {
                         "ui-column-span": 2,
-                        "ui-order-priority": 800
+                        "ui-order-priority": 800,
+                        "ui-render": [
+                          {
+                            "color": "kpi_info",
+                            "condition": "field===true",
+                            "icon": "ToggleOn",
+                            "text": "True"
+                          },
+                          {
+                            "color": "kpi_disabled",
+                            "condition": "field===false",
+                            "icon": "ToggleOff",
+                            "text": "False"
+                          }
+                        ]
                       }
                     },
                     "interface": {
@@ -2575,6 +2991,7 @@
                     "lacpPortPriority": {
                       "default": 32768,
                       "description": "Configure the port priority for LACP. This value is used to determine which port should be activated with LACP fallback mode. Lower values are more preferred.[default=32768]",
+                      "format": "int32",
                       "maximum": 65535,
                       "minimum": 0,
                       "title": "LACP Port Priority",
@@ -2632,6 +3049,7 @@
               },
               "mtu": {
                 "description": "MTU to apply on the interface(s).",
+                "format": "int32",
                 "maximum": 9500,
                 "minimum": 1450,
                 "title": "MTU",
@@ -2675,13 +3093,29 @@
                 "type": "boolean",
                 "x-eda-nokia-com": {
                   "ui-column-span": 2,
-                  "ui-order-priority": 300
+                  "ui-order-priority": 300,
+                  "ui-render": [
+                    {
+                      "color": "kpi_info",
+                      "condition": "field===true",
+                      "icon": "ToggleOn",
+                      "text": "True"
+                    },
+                    {
+                      "color": "kpi_disabled",
+                      "condition": "field===false",
+                      "icon": "ToggleOff",
+                      "text": "False"
+                    }
+                  ]
                 }
               },
               "lag": {
                 "properties": {
                   "adminKey": {
                     "description": "LACP Admin Key.",
+                    "format": "int32",
+                    "maximum": 65535,
                     "title": "Admin Key",
                     "type": "integer",
                     "x-eda-nokia-com": {
@@ -2719,7 +3153,23 @@
                     "enabled": {
                       "description": "The administrative status of this member.",
                       "title": "Enabled",
-                      "type": "boolean"
+                      "type": "boolean",
+                      "x-eda-nokia-com": {
+                        "ui-render": [
+                          {
+                            "color": "kpi_info",
+                            "condition": "field===true",
+                            "icon": "ToggleOn",
+                            "text": "True"
+                          },
+                          {
+                            "color": "kpi_disabled",
+                            "condition": "field===false",
+                            "icon": "ToggleOff",
+                            "text": "False"
+                          }
+                        ]
+                      }
                     },
                     "interface": {
                       "description": "The name of the interface in normalized format.",
@@ -2732,17 +3182,29 @@
                       "title": "Last Change",
                       "type": "string"
                     },
+                    "lldpOperationalState": {
+                      "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+                      "enum": [
+                        "Aligned",
+                        "Misaligned",
+                        "Present",
+                        "NotPresent",
+                        "N/A"
+                      ],
+                      "title": "LLDP Operational State",
+                      "type": "string"
+                    },
                     "neighbors": {
                       "description": "List of discovered neighbors on this member.",
                       "items": {
                         "properties": {
                           "interface": {
-                            "description": "The name of a neighbor interface of this member in node specific format.",
+                            "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
                             "title": "Interface",
                             "type": "string"
                           },
                           "node": {
-                            "description": "The name of a neighbor node of this member in node specific format.",
+                            "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
                             "title": "Node",
                             "type": "string"
                           }
@@ -2772,7 +3234,50 @@
                         "N/A"
                       ],
                       "title": "Operational State",
-                      "type": "string"
+                      "type": "string",
+                      "x-eda-nokia-com": {
+                        "ui-render": [
+                          {
+                            "color": "kpi_success",
+                            "condition": "field===\"Up\"",
+                            "icon": "ArrowUpCircle"
+                          },
+                          {
+                            "color": "kpi_major",
+                            "condition": "field===\"Degraded\"",
+                            "icon": "AlarmCircle"
+                          },
+                          {
+                            "color": "kpi_critical",
+                            "condition": "field===\"Down\"",
+                            "icon": "ArrowDownCircle"
+                          },
+                          {
+                            "color": "kpi_warning",
+                            "condition": "field===\"Unknown\"",
+                            "icon": "RemoveCircle"
+                          },
+                          {
+                            "color": "kpi_neutral",
+                            "condition": "field===\"N/A\"",
+                            "icon": "RemoveCircle"
+                          }
+                        ]
+                      }
+                    },
+                    "operationalStateReason": {
+                      "description": "Indicates the reason for the operational state. Currently only used when the state is Down.",
+                      "enum": [
+                        "Standby",
+                        "Other",
+                        "Lower Layer Down"
+                      ],
+                      "title": "Operational State Reason",
+                      "type": "string",
+                      "x-eda-nokia-com": {
+                        "ui-column-span": 2,
+                        "ui-order-priority": 200
+                      }
                     },
                     "speed": {
                       "description": "Indicates the operational speed of the member.",
@@ -2804,7 +3309,34 @@
                 "type": "string",
                 "x-eda-nokia-com": {
                   "ui-column-span": 2,
-                  "ui-order-priority": 100
+                  "ui-order-priority": 100,
+                  "ui-render": [
+                    {
+                      "color": "kpi_success",
+                      "condition": "field===\"Up\"",
+                      "icon": "ArrowUpCircle"
+                    },
+                    {
+                      "color": "kpi_major",
+                      "condition": "field===\"Degraded\"",
+                      "icon": "AlarmCircle"
+                    },
+                    {
+                      "color": "kpi_critical",
+                      "condition": "field===\"Down\"",
+                      "icon": "ArrowDownCircle"
+                    },
+                    {
+                      "color": "kpi_warning",
+                      "condition": "field===\"Unknown\"",
+                      "icon": "RemoveCircle"
+                    },
+                    {
+                      "color": "kpi_neutral",
+                      "condition": "field===\"N/A\"",
+                      "icon": "RemoveCircle"
+                    }
+                  ]
                 }
               },
               "speed": {
@@ -2877,6 +3409,10 @@
             "format": "date-time",
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "commitTime"
+              },
               "ui-order-priority": 50,
               "ui-title": "Commit Time",
               "ui-title-key": "commitTime"
@@ -2885,6 +3421,10 @@
           "hash": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "commitHash"
+              },
               "ui-order-priority": 40,
               "ui-title": "Commit Hash",
               "ui-title-key": "commitHash"
@@ -2893,6 +3433,14 @@
           "name": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "name"
+              },
+              "key": {
+                "index": 2,
+                "is-name": true
+              },
               "ui-order-priority": 10,
               "ui-title": "Name",
               "ui-title-key": "name"
@@ -2901,6 +3449,14 @@
           "namespace": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "namespace"
+              },
+              "key": {
+                "index": 1,
+                "is-namespace": true
+              },
               "ui-order-priority": 20,
               "ui-title": "Namespace",
               "ui-title-key": "namespace"
@@ -2910,6 +3466,10 @@
             "format": "uint64",
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "group": "core.eda.nokia.com",
+                "title": "transactionId"
+              },
               "ui-order-priority": 30,
               "ui-title": "Transaction ID",
               "ui-title-key": "transactionId"
@@ -2931,6 +3491,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.critical"
+              },
               "ui-title": "Critical",
               "ui-title-key": "alarm_severities.critical"
             }
@@ -2940,6 +3503,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.major"
+              },
               "ui-title": "Major",
               "ui-title-key": "alarm_severities.major"
             }
@@ -2949,6 +3515,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.minor"
+              },
               "ui-title": "minor",
               "ui-title-key": "alarm_severities.minor"
             }
@@ -2958,6 +3527,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "alarm_severities.warning"
+              },
               "ui-title": "Warning",
               "ui-title-key": "alarm_severities.warning"
             }
@@ -2966,6 +3538,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "alarms"
+          },
           "ui-order-priority": 40,
           "ui-title": "Alarms",
           "ui-title-key": "alarms"
@@ -2978,6 +3554,9 @@
             "readOnly": true,
             "type": "integer",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "count_column"
+              },
               "ui-title": "Count",
               "ui-title-key": "count_column"
             }
@@ -2986,6 +3565,10 @@
         "readOnly": true,
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "deviations"
+          },
           "ui-order-priority": 50,
           "ui-title": "Deviations",
           "ui-title-key": "deviations"
@@ -2999,6 +3582,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "annotations"
+              },
               "ui-order-priority": 40,
               "ui-title": "Annotations",
               "ui-title-key": "annotations"
@@ -3010,6 +3596,9 @@
             },
             "type": "object",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "labels"
+              },
               "ui-auto-completes": [
                 {
                   "condition": "true",
@@ -3029,7 +3618,15 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$",
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "name"
+              },
               "immutable": true,
+              "key": {
+                "index": 2,
+                "is-mirror": true,
+                "is-name": true
+              },
               "ui-order-priority": 10,
               "ui-pattern-error": "A valid name is made up of one or more components where each component is separated by period characters.  Each component must start and end with a lower case alphanumeric character and the body of the component is made up of zero or more lower case alphanumeric and hyphen characters.",
               "ui-title": "Name",
@@ -3039,7 +3636,15 @@
           "namespace": {
             "type": "string",
             "x-eda-nokia-com": {
+              "i18n-keys": {
+                "title": "namespace"
+              },
               "immutable": true,
+              "key": {
+                "index": 1,
+                "is-mirror": true,
+                "is-namespace": true
+              },
               "ui-order-priority": 20,
               "ui-title": "Namespace",
               "ui-title-key": "namespace"
@@ -3052,6 +3657,10 @@
         ],
         "type": "object",
         "x-eda-nokia-com": {
+          "i18n-keys": {
+            "group": "core.eda.nokia.com",
+            "title": "metadata"
+          },
           "ui-order-priority": 10,
           "ui-title": "Metadata",
           "ui-title-key": "metadata"
@@ -3411,6 +4020,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "description": "the namespace scope from which to perform the delete",
             "in": "path",
             "name": "namespace",
@@ -3574,6 +4192,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -3709,6 +4336,15 @@
             "description": "If true, prevents the transaction resulting from this request from being bundled with others.",
             "in": "query",
             "name": "disableBatching",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -3869,6 +4505,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -3947,6 +4592,15 @@
             "description": "If true, prevents the transaction resulting from this request from being bundled with others.",
             "in": "query",
             "name": "disableBatching",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -4292,6 +4946,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "description": "the namespace scope from which to perform the delete",
             "in": "path",
             "name": "namespace",
@@ -4455,6 +5118,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -4590,6 +5262,15 @@
             "description": "If true, prevents the transaction resulting from this request from being bundled with others.",
             "in": "query",
             "name": "disableBatching",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -4750,6 +5431,15 @@
             }
           },
           {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "in": "path",
             "name": "namespace",
             "required": true,
@@ -4828,6 +5518,15 @@
             "description": "If true, prevents the transaction resulting from this request from being bundled with others.",
             "in": "query",
             "name": "disableBatching",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true, pipelines will not be run for the resulting transaction",
+            "in": "query",
+            "name": "skipPipeline",
             "schema": {
               "default": false,
               "type": "boolean"

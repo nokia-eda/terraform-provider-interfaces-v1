@@ -107,17 +107,17 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 									Attributes: map[string]schema.Attribute{
 										"checks": schema.ListAttribute{
 											ElementType:         types.StringType,
-											Optional:            true,
+											Computed:            true,
 											Description:         "Which checks to run in the CheckStateCounters stage.\nIf none are specified, all checks will be run.",
 											MarkdownDescription: "Which checks to run in the CheckStateCounters stage.\nIf none are specified, all checks will be run.",
 										},
 										"skip": schema.BoolAttribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Boolean to indicate if checking for Interface Errors needs to be skipped.",
 											MarkdownDescription: "Boolean to indicate if checking for Interface Errors needs to be skipped.",
 										},
 										"wait_time_seconds": schema.Int64Attribute{
-											Optional:            true,
+											Computed:            true,
 											Description:         "Wait Time (seconds) sample interval to verify if error counters increased.",
 											MarkdownDescription: "Wait Time (seconds) sample interval to verify if error counters increased.",
 										},
@@ -127,21 +127,21 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 											AttrTypes: CheckStateCountersValue{}.AttributeTypes(ctx),
 										},
 									},
-									Optional:            true,
+									Computed:            true,
 									Description:         "Configure checking state paths for erroneous counter increments.",
 									MarkdownDescription: "Configure checking state paths for erroneous counter increments.",
 								},
 								"interface_selectors": schema.ListAttribute{
 									ElementType: types.StringType,
-									Optional:    true,
+									Computed:    true,
 								},
 								"node_selectors": schema.ListAttribute{
 									ElementType: types.StringType,
-									Optional:    true,
+									Computed:    true,
 								},
 								"nodes": schema.ListAttribute{
 									ElementType: types.StringType,
-									Optional:    true,
+									Computed:    true,
 								},
 							},
 							CustomType: SpecType{
@@ -149,7 +149,7 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 									AttrTypes: SpecValue{}.AttributeTypes(ctx),
 								},
 							},
-							Optional:            true,
+							Computed:            true,
 							Description:         "CheckInterfacesSpec defines the desired state of CheckInterfaces",
 							MarkdownDescription: "CheckInterfacesSpec defines the desired state of CheckInterfaces",
 						},
@@ -249,18 +249,23 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 																				Description:         "Indicates when this member last changed state.",
 																				MarkdownDescription: "Indicates when this member last changed state.",
 																			},
+																			"lldp_operational_state": schema.StringAttribute{
+																				Computed:            true,
+																				Description:         "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+																				MarkdownDescription: "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+																			},
 																			"neighbors": schema.ListNestedAttribute{
 																				NestedObject: schema.NestedAttributeObject{
 																					Attributes: map[string]schema.Attribute{
 																						"interface": schema.StringAttribute{
 																							Computed:            true,
-																							Description:         "The name of a neighbor interface of this member in node specific format.",
-																							MarkdownDescription: "The name of a neighbor interface of this member in node specific format.",
+																							Description:         "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
+																							MarkdownDescription: "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved.",
 																						},
 																						"node": schema.StringAttribute{
 																							Computed:            true,
-																							Description:         "The name of a neighbor node of this member in node specific format.",
-																							MarkdownDescription: "The name of a neighbor node of this member in node specific format.",
+																							Description:         "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
+																							MarkdownDescription: "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is.",
 																						},
 																					},
 																					CustomType: NeighborsType{
@@ -287,6 +292,11 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 																				Computed:            true,
 																				Description:         "Indicates the current operational state of this member.",
 																				MarkdownDescription: "Indicates the current operational state of this member.",
+																			},
+																			"operational_state_reason": schema.StringAttribute{
+																				Computed:            true,
+																				Description:         "Indicates the reason for the operational state. Currently only used when the state is Down.",
+																				MarkdownDescription: "Indicates the reason for the operational state. Currently only used when the state is Down.",
 																			},
 																			"speed": schema.StringAttribute{
 																				Computed:            true,
@@ -365,6 +375,11 @@ func CheckInterfacesListDataSourceSchema(ctx context.Context) schema.Schema {
 									Computed:            true,
 									Description:         "Aggregate result of the Flow",
 									MarkdownDescription: "Aggregate result of the Flow",
+								},
+								"summary": schema.StringAttribute{
+									Computed:            true,
+									Description:         "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text).",
+									MarkdownDescription: "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text).",
 								},
 							},
 							CustomType: StatusType{
@@ -3717,6 +3732,24 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 			fmt.Sprintf(`result expected to be basetypes.StringValue, was: %T`, resultAttribute))
 	}
 
+	summaryAttribute, ok := attributes["summary"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`summary is missing from object`)
+
+		return nil, diags
+	}
+
+	summaryVal, ok := summaryAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`summary expected to be basetypes.StringValue, was: %T`, summaryAttribute))
+	}
+
 	if diags.HasError() {
 		return nil, diags
 	}
@@ -3724,6 +3757,7 @@ func (t StatusType) ValueFromObject(ctx context.Context, in basetypes.ObjectValu
 	return StatusValue{
 		Details: detailsVal,
 		Result:  resultVal,
+		Summary: summaryVal,
 		state:   attr.ValueStateKnown,
 	}, diags
 }
@@ -3827,6 +3861,24 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 			fmt.Sprintf(`result expected to be basetypes.StringValue, was: %T`, resultAttribute))
 	}
 
+	summaryAttribute, ok := attributes["summary"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`summary is missing from object`)
+
+		return NewStatusValueUnknown(), diags
+	}
+
+	summaryVal, ok := summaryAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`summary expected to be basetypes.StringValue, was: %T`, summaryAttribute))
+	}
+
 	if diags.HasError() {
 		return NewStatusValueUnknown(), diags
 	}
@@ -3834,6 +3886,7 @@ func NewStatusValue(attributeTypes map[string]attr.Type, attributes map[string]a
 	return StatusValue{
 		Details: detailsVal,
 		Result:  resultVal,
+		Summary: summaryVal,
 		state:   attr.ValueStateKnown,
 	}, diags
 }
@@ -3908,11 +3961,12 @@ var _ basetypes.ObjectValuable = StatusValue{}
 type StatusValue struct {
 	Details basetypes.ListValue   `tfsdk:"details"`
 	Result  basetypes.StringValue `tfsdk:"result"`
+	Summary basetypes.StringValue `tfsdk:"summary"`
 	state   attr.ValueState
 }
 
 func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 2)
+	attrTypes := make(map[string]tftypes.Type, 3)
 
 	var val tftypes.Value
 	var err error
@@ -3921,12 +3975,13 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 		ElemType: DetailsValue{}.Type(ctx),
 	}.TerraformType(ctx)
 	attrTypes["result"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["summary"] = basetypes.StringType{}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 2)
+		vals := make(map[string]tftypes.Value, 3)
 
 		val, err = v.Details.ToTerraformValue(ctx)
 
@@ -3943,6 +3998,14 @@ func (v StatusValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error
 		}
 
 		vals["result"] = val
+
+		val, err = v.Summary.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["summary"] = val
 
 		if err := tftypes.ValidateValue(objectType, vals); err != nil {
 			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
@@ -4006,7 +4069,8 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 		"details": basetypes.ListType{
 			ElemType: DetailsValue{}.Type(ctx),
 		},
-		"result": basetypes.StringType{},
+		"result":  basetypes.StringType{},
+		"summary": basetypes.StringType{},
 	}
 
 	if v.IsNull() {
@@ -4022,6 +4086,7 @@ func (v StatusValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, 
 		map[string]attr.Value{
 			"details": details,
 			"result":  v.Result,
+			"summary": v.Summary,
 		})
 
 	return objVal, diags
@@ -4050,6 +4115,10 @@ func (v StatusValue) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.Summary.Equal(other.Summary) {
+		return false
+	}
+
 	return true
 }
 
@@ -4066,7 +4135,8 @@ func (v StatusValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 		"details": basetypes.ListType{
 			ElemType: DetailsValue{}.Type(ctx),
 		},
-		"result": basetypes.StringType{},
+		"result":  basetypes.StringType{},
+		"summary": basetypes.StringType{},
 	}
 }
 
@@ -6720,6 +6790,24 @@ func (t MembersType) ValueFromObject(ctx context.Context, in basetypes.ObjectVal
 			fmt.Sprintf(`last_change expected to be basetypes.StringValue, was: %T`, lastChangeAttribute))
 	}
 
+	lldpOperationalStateAttribute, ok := attributes["lldp_operational_state"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`lldp_operational_state is missing from object`)
+
+		return nil, diags
+	}
+
+	lldpOperationalStateVal, ok := lldpOperationalStateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`lldp_operational_state expected to be basetypes.StringValue, was: %T`, lldpOperationalStateAttribute))
+	}
+
 	neighborsAttribute, ok := attributes["neighbors"]
 
 	if !ok {
@@ -6792,6 +6880,24 @@ func (t MembersType) ValueFromObject(ctx context.Context, in basetypes.ObjectVal
 			fmt.Sprintf(`operational_state expected to be basetypes.StringValue, was: %T`, operationalStateAttribute))
 	}
 
+	operationalStateReasonAttribute, ok := attributes["operational_state_reason"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_state_reason is missing from object`)
+
+		return nil, diags
+	}
+
+	operationalStateReasonVal, ok := operationalStateReasonAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_state_reason expected to be basetypes.StringValue, was: %T`, operationalStateReasonAttribute))
+	}
+
 	speedAttribute, ok := attributes["speed"]
 
 	if !ok {
@@ -6815,15 +6921,17 @@ func (t MembersType) ValueFromObject(ctx context.Context, in basetypes.ObjectVal
 	}
 
 	return MembersValue{
-		Enabled:          enabledVal,
-		Interface:        interfaceVal,
-		LastChange:       lastChangeVal,
-		Neighbors:        neighborsVal,
-		Node:             nodeVal,
-		NodeInterface:    nodeInterfaceVal,
-		OperationalState: operationalStateVal,
-		Speed:            speedVal,
-		state:            attr.ValueStateKnown,
+		Enabled:                enabledVal,
+		Interface:              interfaceVal,
+		LastChange:             lastChangeVal,
+		LldpOperationalState:   lldpOperationalStateVal,
+		Neighbors:              neighborsVal,
+		Node:                   nodeVal,
+		NodeInterface:          nodeInterfaceVal,
+		OperationalState:       operationalStateVal,
+		OperationalStateReason: operationalStateReasonVal,
+		Speed:                  speedVal,
+		state:                  attr.ValueStateKnown,
 	}, diags
 }
 
@@ -6944,6 +7052,24 @@ func NewMembersValue(attributeTypes map[string]attr.Type, attributes map[string]
 			fmt.Sprintf(`last_change expected to be basetypes.StringValue, was: %T`, lastChangeAttribute))
 	}
 
+	lldpOperationalStateAttribute, ok := attributes["lldp_operational_state"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`lldp_operational_state is missing from object`)
+
+		return NewMembersValueUnknown(), diags
+	}
+
+	lldpOperationalStateVal, ok := lldpOperationalStateAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`lldp_operational_state expected to be basetypes.StringValue, was: %T`, lldpOperationalStateAttribute))
+	}
+
 	neighborsAttribute, ok := attributes["neighbors"]
 
 	if !ok {
@@ -7016,6 +7142,24 @@ func NewMembersValue(attributeTypes map[string]attr.Type, attributes map[string]
 			fmt.Sprintf(`operational_state expected to be basetypes.StringValue, was: %T`, operationalStateAttribute))
 	}
 
+	operationalStateReasonAttribute, ok := attributes["operational_state_reason"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`operational_state_reason is missing from object`)
+
+		return NewMembersValueUnknown(), diags
+	}
+
+	operationalStateReasonVal, ok := operationalStateReasonAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`operational_state_reason expected to be basetypes.StringValue, was: %T`, operationalStateReasonAttribute))
+	}
+
 	speedAttribute, ok := attributes["speed"]
 
 	if !ok {
@@ -7039,15 +7183,17 @@ func NewMembersValue(attributeTypes map[string]attr.Type, attributes map[string]
 	}
 
 	return MembersValue{
-		Enabled:          enabledVal,
-		Interface:        interfaceVal,
-		LastChange:       lastChangeVal,
-		Neighbors:        neighborsVal,
-		Node:             nodeVal,
-		NodeInterface:    nodeInterfaceVal,
-		OperationalState: operationalStateVal,
-		Speed:            speedVal,
-		state:            attr.ValueStateKnown,
+		Enabled:                enabledVal,
+		Interface:              interfaceVal,
+		LastChange:             lastChangeVal,
+		LldpOperationalState:   lldpOperationalStateVal,
+		Neighbors:              neighborsVal,
+		Node:                   nodeVal,
+		NodeInterface:          nodeInterfaceVal,
+		OperationalState:       operationalStateVal,
+		OperationalStateReason: operationalStateReasonVal,
+		Speed:                  speedVal,
+		state:                  attr.ValueStateKnown,
 	}, diags
 }
 
@@ -7119,19 +7265,21 @@ func (t MembersType) ValueType(ctx context.Context) attr.Value {
 var _ basetypes.ObjectValuable = MembersValue{}
 
 type MembersValue struct {
-	Enabled          basetypes.BoolValue   `tfsdk:"enabled"`
-	Interface        basetypes.StringValue `tfsdk:"interface"`
-	LastChange       basetypes.StringValue `tfsdk:"last_change"`
-	Neighbors        basetypes.ListValue   `tfsdk:"neighbors"`
-	Node             basetypes.StringValue `tfsdk:"node"`
-	NodeInterface    basetypes.StringValue `tfsdk:"node_interface"`
-	OperationalState basetypes.StringValue `tfsdk:"operational_state"`
-	Speed            basetypes.StringValue `tfsdk:"speed"`
-	state            attr.ValueState
+	Enabled                basetypes.BoolValue   `tfsdk:"enabled"`
+	Interface              basetypes.StringValue `tfsdk:"interface"`
+	LastChange             basetypes.StringValue `tfsdk:"last_change"`
+	LldpOperationalState   basetypes.StringValue `tfsdk:"lldp_operational_state"`
+	Neighbors              basetypes.ListValue   `tfsdk:"neighbors"`
+	Node                   basetypes.StringValue `tfsdk:"node"`
+	NodeInterface          basetypes.StringValue `tfsdk:"node_interface"`
+	OperationalState       basetypes.StringValue `tfsdk:"operational_state"`
+	OperationalStateReason basetypes.StringValue `tfsdk:"operational_state_reason"`
+	Speed                  basetypes.StringValue `tfsdk:"speed"`
+	state                  attr.ValueState
 }
 
 func (v MembersValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
-	attrTypes := make(map[string]tftypes.Type, 8)
+	attrTypes := make(map[string]tftypes.Type, 10)
 
 	var val tftypes.Value
 	var err error
@@ -7139,19 +7287,21 @@ func (v MembersValue) ToTerraformValue(ctx context.Context) (tftypes.Value, erro
 	attrTypes["enabled"] = basetypes.BoolType{}.TerraformType(ctx)
 	attrTypes["interface"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["last_change"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["lldp_operational_state"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["neighbors"] = basetypes.ListType{
 		ElemType: NeighborsValue{}.Type(ctx),
 	}.TerraformType(ctx)
 	attrTypes["node"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["node_interface"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["operational_state"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["operational_state_reason"] = basetypes.StringType{}.TerraformType(ctx)
 	attrTypes["speed"] = basetypes.StringType{}.TerraformType(ctx)
 
 	objectType := tftypes.Object{AttributeTypes: attrTypes}
 
 	switch v.state {
 	case attr.ValueStateKnown:
-		vals := make(map[string]tftypes.Value, 8)
+		vals := make(map[string]tftypes.Value, 10)
 
 		val, err = v.Enabled.ToTerraformValue(ctx)
 
@@ -7176,6 +7326,14 @@ func (v MembersValue) ToTerraformValue(ctx context.Context) (tftypes.Value, erro
 		}
 
 		vals["last_change"] = val
+
+		val, err = v.LldpOperationalState.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["lldp_operational_state"] = val
 
 		val, err = v.Neighbors.ToTerraformValue(ctx)
 
@@ -7208,6 +7366,14 @@ func (v MembersValue) ToTerraformValue(ctx context.Context) (tftypes.Value, erro
 		}
 
 		vals["operational_state"] = val
+
+		val, err = v.OperationalStateReason.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["operational_state_reason"] = val
 
 		val, err = v.Speed.ToTerraformValue(ctx)
 
@@ -7276,16 +7442,18 @@ func (v MembersValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue,
 	}
 
 	attributeTypes := map[string]attr.Type{
-		"enabled":     basetypes.BoolType{},
-		"interface":   basetypes.StringType{},
-		"last_change": basetypes.StringType{},
+		"enabled":                basetypes.BoolType{},
+		"interface":              basetypes.StringType{},
+		"last_change":            basetypes.StringType{},
+		"lldp_operational_state": basetypes.StringType{},
 		"neighbors": basetypes.ListType{
 			ElemType: NeighborsValue{}.Type(ctx),
 		},
-		"node":              basetypes.StringType{},
-		"node_interface":    basetypes.StringType{},
-		"operational_state": basetypes.StringType{},
-		"speed":             basetypes.StringType{},
+		"node":                     basetypes.StringType{},
+		"node_interface":           basetypes.StringType{},
+		"operational_state":        basetypes.StringType{},
+		"operational_state_reason": basetypes.StringType{},
+		"speed":                    basetypes.StringType{},
 	}
 
 	if v.IsNull() {
@@ -7299,14 +7467,16 @@ func (v MembersValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue,
 	objVal, diags := types.ObjectValue(
 		attributeTypes,
 		map[string]attr.Value{
-			"enabled":           v.Enabled,
-			"interface":         v.Interface,
-			"last_change":       v.LastChange,
-			"neighbors":         neighbors,
-			"node":              v.Node,
-			"node_interface":    v.NodeInterface,
-			"operational_state": v.OperationalState,
-			"speed":             v.Speed,
+			"enabled":                  v.Enabled,
+			"interface":                v.Interface,
+			"last_change":              v.LastChange,
+			"lldp_operational_state":   v.LldpOperationalState,
+			"neighbors":                neighbors,
+			"node":                     v.Node,
+			"node_interface":           v.NodeInterface,
+			"operational_state":        v.OperationalState,
+			"operational_state_reason": v.OperationalStateReason,
+			"speed":                    v.Speed,
 		})
 
 	return objVal, diags
@@ -7339,6 +7509,10 @@ func (v MembersValue) Equal(o attr.Value) bool {
 		return false
 	}
 
+	if !v.LldpOperationalState.Equal(other.LldpOperationalState) {
+		return false
+	}
+
 	if !v.Neighbors.Equal(other.Neighbors) {
 		return false
 	}
@@ -7352,6 +7526,10 @@ func (v MembersValue) Equal(o attr.Value) bool {
 	}
 
 	if !v.OperationalState.Equal(other.OperationalState) {
+		return false
+	}
+
+	if !v.OperationalStateReason.Equal(other.OperationalStateReason) {
 		return false
 	}
 
@@ -7372,16 +7550,18 @@ func (v MembersValue) Type(ctx context.Context) attr.Type {
 
 func (v MembersValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
 	return map[string]attr.Type{
-		"enabled":     basetypes.BoolType{},
-		"interface":   basetypes.StringType{},
-		"last_change": basetypes.StringType{},
+		"enabled":                basetypes.BoolType{},
+		"interface":              basetypes.StringType{},
+		"last_change":            basetypes.StringType{},
+		"lldp_operational_state": basetypes.StringType{},
 		"neighbors": basetypes.ListType{
 			ElemType: NeighborsValue{}.Type(ctx),
 		},
-		"node":              basetypes.StringType{},
-		"node_interface":    basetypes.StringType{},
-		"operational_state": basetypes.StringType{},
-		"speed":             basetypes.StringType{},
+		"node":                     basetypes.StringType{},
+		"node_interface":           basetypes.StringType{},
+		"operational_state":        basetypes.StringType{},
+		"operational_state_reason": basetypes.StringType{},
+		"speed":                    basetypes.StringType{},
 	}
 }
 

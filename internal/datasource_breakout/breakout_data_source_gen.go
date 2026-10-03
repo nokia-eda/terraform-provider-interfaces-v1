@@ -102,30 +102,30 @@ func BreakoutDataSourceSchema(ctx context.Context) schema.Schema {
 			"spec": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"channels": schema.Int64Attribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The number of breakout channels to create.",
 						MarkdownDescription: "The number of breakout channels to create.",
 					},
 					"interfaces": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "A list of normalized parent interface/port.",
 						MarkdownDescription: "A list of normalized parent interface/port.",
 					},
 					"node_selectors": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.",
 						MarkdownDescription: "Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.",
 					},
 					"nodes": schema.ListAttribute{
 						ElementType:         types.StringType,
-						Optional:            true,
+						Computed:            true,
 						Description:         "Reference to a list of TopoNodes where the parent interfaces are to be broken out.",
 						MarkdownDescription: "Reference to a list of TopoNodes where the parent interfaces are to be broken out.",
 					},
 					"speed": schema.StringAttribute{
-						Optional:            true,
+						Computed:            true,
 						Description:         "The speed of each breakout channel.",
 						MarkdownDescription: "The speed of each breakout channel.",
 					},
@@ -135,7 +135,7 @@ func BreakoutDataSourceSchema(ctx context.Context) schema.Schema {
 						AttrTypes: SpecValue{}.AttributeTypes(ctx),
 					},
 				},
-				Optional:            true,
+				Computed:            true,
 				Description:         "Breakout allows for the configuration of interface breakouts on specified Nodes. This resource specifies the Nodes, parent Interfaces, the number of breakout channels, and the speed of each channel.",
 				MarkdownDescription: "Breakout allows for the configuration of interface breakouts on specified Nodes. This resource specifies the Nodes, parent Interfaces, the number of breakout channels, and the speed of each channel.",
 			},

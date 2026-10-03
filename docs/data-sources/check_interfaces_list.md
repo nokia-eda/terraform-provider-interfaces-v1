@@ -35,10 +35,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) CheckInterfacesSpec defines the desired state of CheckInterfaces (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -46,29 +42,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) CheckInterfacesSpec defines the desired state of CheckInterfaces (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) CheckInterfacesStatus defines the observed state of CheckInterfaces (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `check_state_counters` (Attributes) Configure checking state paths for erroneous counter increments. (see [below for nested schema](#nestedatt--items--spec--check_state_counters))
-- `interface_selectors` (List of String)
-- `node_selectors` (List of String)
-- `nodes` (List of String)
-
-<a id="nestedatt--items--spec--check_state_counters"></a>
-### Nested Schema for `items.spec.check_state_counters`
-
-Optional:
-
-- `checks` (List of String) Which checks to run in the CheckStateCounters stage.
-If none are specified, all checks will be run.
-- `skip` (Boolean) Boolean to indicate if checking for Interface Errors needs to be skipped.
-- `wait_time_seconds` (Number) Wait Time (seconds) sample interval to verify if error counters increased.
-
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -100,6 +75,28 @@ Read-Only:
 - `namespace` (String)
 
 
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `check_state_counters` (Attributes) Configure checking state paths for erroneous counter increments. (see [below for nested schema](#nestedatt--items--spec--check_state_counters))
+- `interface_selectors` (List of String)
+- `node_selectors` (List of String)
+- `nodes` (List of String)
+
+<a id="nestedatt--items--spec--check_state_counters"></a>
+### Nested Schema for `items.spec.check_state_counters`
+
+Read-Only:
+
+- `checks` (List of String) Which checks to run in the CheckStateCounters stage.
+If none are specified, all checks will be run.
+- `skip` (Boolean) Boolean to indicate if checking for Interface Errors needs to be skipped.
+- `wait_time_seconds` (Number) Wait Time (seconds) sample interval to verify if error counters increased.
+
+
+
 <a id="nestedatt--items--status"></a>
 ### Nested Schema for `items.status`
 
@@ -108,6 +105,7 @@ Read-Only:
 - `details` (Attributes List) Details contains the results of the checks performed on each node.
 Each entry in the list corresponds to a node where the Operational State has been checked. (see [below for nested schema](#nestedatt--items--status--details))
 - `result` (String) Aggregate result of the Flow
+- `summary` (String) Summary is an optional human-readable summary (e.g. compare-with-previous degrade text).
 
 <a id="nestedatt--items--status--details"></a>
 ### Nested Schema for `items.status.details`
@@ -168,10 +166,28 @@ Read-Only:
 - `enabled` (Boolean) The administrative status of this member.
 - `interface` (String) The name of the interface in normalized format.
 - `last_change` (String) Indicates when this member last changed state.
+- `lldp_operational_state` (String) Indicates how the discovered LLDP neighbor on this member relates to the
+configured topology mate.
+
+  * ``Aligned``    – LLDP is enabled on the local member and the discovered
+                     neighbor matches the configured remote endpoint
+                     (TopoLink mate / static neighbor).
+  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it
+                     does not match the configured remote endpoint. This
+                     is the only state that raises ``LLDPTopologyMisaligned``.
+  * ``Present``    – LLDP is enabled and at least one neighbor is
+                     discovered, but the configured remote endpoint is not
+                     authoritative enough to validate alignment (no
+                     TopoLink resolved, peer Interface CR missing on an
+                     interSwitch link, or stub edge with no mate).
+  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.
+  * ``N/A``        – LLDP is administratively disabled on the local member
+                     (``spec.lldp == false``).
 - `neighbors` (Attributes List) List of discovered neighbors on this member. (see [below for nested schema](#nestedatt--items--status--details--details--operational_state--members--neighbors))
 - `node` (String) The node on which the interface is configured.
 - `node_interface` (String) Node specific interface name, for example "ethernet-1/1", "1/1/c1/1".
 - `operational_state` (String) Indicates the current operational state of this member.
+- `operational_state_reason` (String) Indicates the reason for the operational state. Currently only used when the state is Down.
 - `speed` (String) Indicates the operational speed of the member.
 
 <a id="nestedatt--items--status--details--details--operational_state--members--neighbors"></a>
@@ -179,5 +195,9 @@ Read-Only:
 
 Read-Only:
 
-- `interface` (String) The name of a neighbor interface of this member in node specific format.
-- `node` (String) The name of a neighbor node of this member in node specific format.
+- `interface` (String) The neighbor interface name. When the neighbor node is EDA-managed
+this is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);
+for non-EDA-managed peers the LLDP wire form is preserved.
+- `node` (String) The name of a neighbor node of this member. When the neighbor is an
+EDA-managed TopoNode this matches the TopoNode name; otherwise the
+LLDP system-name TLV is used as-is.

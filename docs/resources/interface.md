@@ -184,6 +184,16 @@ Optional:
 - `preferred_active_node` (String) When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured.
 - `reload_delay_timer_seconds` (Number) After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]
 - `revertive` (Boolean) Enables revertive DF election behavior with Preference-Based Election mode. [default=false]
+- `vtep` (Attributes) VTEP mode configuration for the Multi-homed Ethernet Segment. (see [below for nested schema](#nestedatt--spec--lag--multihoming--vtep))
+
+<a id="nestedatt--spec--lag--multihoming--vtep"></a>
+### Nested Schema for `spec.lag.multihoming.vtep`
+
+Optional:
+
+- `anycast_ipv4pool` (String) Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast.
+- `mode` (String) VTEP mode for the Multi-homed Ethernet Segment.
+
 
 
 
@@ -240,9 +250,27 @@ Optional:
 - `enabled` (Boolean) The administrative status of this member.
 - `interface` (String) The name of the interface in normalized format.
 - `last_change` (String) Indicates when this member last changed state.
+- `lldp_operational_state` (String) Indicates how the discovered LLDP neighbor on this member relates to the
+configured topology mate.
+
+  * ``Aligned``    – LLDP is enabled on the local member and the discovered
+                     neighbor matches the configured remote endpoint
+                     (TopoLink mate / static neighbor).
+  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it
+                     does not match the configured remote endpoint. This
+                     is the only state that raises ``LLDPTopologyMisaligned``.
+  * ``Present``    – LLDP is enabled and at least one neighbor is
+                     discovered, but the configured remote endpoint is not
+                     authoritative enough to validate alignment (no
+                     TopoLink resolved, peer Interface CR missing on an
+                     interSwitch link, or stub edge with no mate).
+  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.
+  * ``N/A``        – LLDP is administratively disabled on the local member
+                     (``spec.lldp == false``).
 - `neighbors` (Attributes List) List of discovered neighbors on this member. (see [below for nested schema](#nestedatt--status--members--neighbors))
 - `node` (String) The node on which the interface is configured.
 - `operational_state` (String) Indicates the current operational state of this member.
+- `operational_state_reason` (String) Indicates the reason for the operational state. Currently only used when the state is Down.
 - `speed` (String) Indicates the operational speed of the member.
 
 <a id="nestedatt--status--members--neighbors"></a>
@@ -250,5 +278,9 @@ Optional:
 
 Optional:
 
-- `interface` (String) The name of a neighbor interface of this member in node specific format.
-- `node` (String) The name of a neighbor node of this member in node specific format.
+- `interface` (String) The neighbor interface name. When the neighbor node is EDA-managed
+this is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);
+for non-EDA-managed peers the LLDP wire form is preserved.
+- `node` (String) The name of a neighbor node of this member. When the neighbor is an
+EDA-managed TopoNode this matches the TopoNode name; otherwise the
+LLDP system-name TLV is used as-is.

@@ -35,10 +35,6 @@ description: |-
 <a id="nestedatt--items"></a>
 ### Nested Schema for `items`
 
-Optional:
-
-- `spec` (Attributes) Breakout allows for the configuration of interface breakouts on specified Nodes. This resource specifies the Nodes, parent Interfaces, the number of breakout channels, and the speed of each channel. (see [below for nested schema](#nestedatt--items--spec))
-
 Read-Only:
 
 - `alarms` (Attributes) (see [below for nested schema](#nestedatt--items--alarms))
@@ -46,19 +42,8 @@ Read-Only:
 - `deviations` (Attributes) (see [below for nested schema](#nestedatt--items--deviations))
 - `kind` (String)
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--items--metadata))
+- `spec` (Attributes) Breakout allows for the configuration of interface breakouts on specified Nodes. This resource specifies the Nodes, parent Interfaces, the number of breakout channels, and the speed of each channel. (see [below for nested schema](#nestedatt--items--spec))
 - `status` (Attributes) BreakoutStatus defines the observed state of Breakout (see [below for nested schema](#nestedatt--items--status))
-
-<a id="nestedatt--items--spec"></a>
-### Nested Schema for `items.spec`
-
-Optional:
-
-- `channels` (Number) The number of breakout channels to create.
-- `interfaces` (List of String) A list of normalized parent interface/port.
-- `node_selectors` (List of String) Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.
-- `nodes` (List of String) Reference to a list of TopoNodes where the parent interfaces are to be broken out.
-- `speed` (String) The speed of each breakout channel.
-
 
 <a id="nestedatt--items--alarms"></a>
 ### Nested Schema for `items.alarms`
@@ -88,6 +73,18 @@ Read-Only:
 - `labels` (Map of String)
 - `name` (String)
 - `namespace` (String)
+
+
+<a id="nestedatt--items--spec"></a>
+### Nested Schema for `items.spec`
+
+Read-Only:
+
+- `channels` (Number) The number of breakout channels to create.
+- `interfaces` (List of String) A list of normalized parent interface/port.
+- `node_selectors` (List of String) Label selector to select nodes on which to configure the breakout interfaces. Either Nodes or NodeSelector must have at least one value set.
+- `nodes` (List of String) Reference to a list of TopoNodes where the parent interfaces are to be broken out.
+- `speed` (String) The speed of each breakout channel.
 
 
 <a id="nestedatt--items--status"></a>

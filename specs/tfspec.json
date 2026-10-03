@@ -191,19 +191,19 @@
                     {
                         "name": "spec",
                         "single_nested": {
-                            "computed_optional_required": "optional",
+                            "computed_optional_required": "computed",
                             "attributes": [
                                 {
                                     "name": "channels",
                                     "int64": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The number of breakout channels to create."
                                     }
                                 },
                                 {
                                     "name": "interfaces",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -213,7 +213,7 @@
                                 {
                                     "name": "node_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -223,7 +223,7 @@
                                 {
                                     "name": "nodes",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -233,7 +233,7 @@
                                 {
                                     "name": "speed",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "The speed of each breakout channel."
                                     }
                                 }
@@ -401,19 +401,19 @@
                                     {
                                         "name": "spec",
                                         "single_nested": {
-                                            "computed_optional_required": "optional",
+                                            "computed_optional_required": "computed",
                                             "attributes": [
                                                 {
                                                     "name": "channels",
                                                     "int64": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The number of breakout channels to create."
                                                     }
                                                 },
                                                 {
                                                     "name": "interfaces",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         },
@@ -423,7 +423,7 @@
                                                 {
                                                     "name": "node_selectors",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         },
@@ -433,7 +433,7 @@
                                                 {
                                                     "name": "nodes",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         },
@@ -443,7 +443,7 @@
                                                 {
                                                     "name": "speed",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "The speed of each breakout channel."
                                                     }
                                                 }
@@ -588,17 +588,17 @@
                     {
                         "name": "spec",
                         "single_nested": {
-                            "computed_optional_required": "optional",
+                            "computed_optional_required": "computed",
                             "attributes": [
                                 {
                                     "name": "check_state_counters",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "attributes": [
                                             {
                                                 "name": "checks",
                                                 "list": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "element_type": {
                                                         "string": {}
                                                     },
@@ -608,14 +608,14 @@
                                             {
                                                 "name": "skip",
                                                 "bool": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "Boolean to indicate if checking for Interface Errors needs to be skipped."
                                                 }
                                             },
                                             {
                                                 "name": "wait_time_seconds",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "Wait Time (seconds) sample interval to verify if error counters increased."
                                                 }
                                             }
@@ -626,7 +626,7 @@
                                 {
                                     "name": "interface_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -635,7 +635,7 @@
                                 {
                                     "name": "node_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -644,7 +644,7 @@
                                 {
                                     "name": "nodes",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -787,6 +787,13 @@
                                                                                                 }
                                                                                             },
                                                                                             {
+                                                                                                "name": "lldp_operational_state",
+                                                                                                "string": {
+                                                                                                    "computed_optional_required": "computed",
+                                                                                                    "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``)."
+                                                                                                }
+                                                                                            },
+                                                                                            {
                                                                                                 "name": "neighbors",
                                                                                                 "list_nested": {
                                                                                                     "computed_optional_required": "computed",
@@ -796,14 +803,14 @@
                                                                                                                 "name": "interface",
                                                                                                                 "string": {
                                                                                                                     "computed_optional_required": "computed",
-                                                                                                                    "description": "The name of a neighbor interface of this member in node specific format."
+                                                                                                                    "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                                                                 }
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "node",
                                                                                                                 "string": {
                                                                                                                     "computed_optional_required": "computed",
-                                                                                                                    "description": "The name of a neighbor node of this member in node specific format."
+                                                                                                                    "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                                                                 }
                                                                                                             }
                                                                                                         ]
@@ -830,6 +837,13 @@
                                                                                                 "string": {
                                                                                                     "computed_optional_required": "computed",
                                                                                                     "description": "Indicates the current operational state of this member."
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "name": "operational_state_reason",
+                                                                                                "string": {
+                                                                                                    "computed_optional_required": "computed",
+                                                                                                    "description": "Indicates the reason for the operational state. Currently only used when the state is Down."
                                                                                                 }
                                                                                             },
                                                                                             {
@@ -898,6 +912,13 @@
                                     "string": {
                                         "computed_optional_required": "computed",
                                         "description": "Aggregate result of the Flow"
+                                    }
+                                },
+                                {
+                                    "name": "summary",
+                                    "string": {
+                                        "computed_optional_required": "computed",
+                                        "description": "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text)."
                                     }
                                 }
                             ],
@@ -1057,17 +1078,17 @@
                                     {
                                         "name": "spec",
                                         "single_nested": {
-                                            "computed_optional_required": "optional",
+                                            "computed_optional_required": "computed",
                                             "attributes": [
                                                 {
                                                     "name": "check_state_counters",
                                                     "single_nested": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "attributes": [
                                                             {
                                                                 "name": "checks",
                                                                 "list": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "element_type": {
                                                                         "string": {}
                                                                     },
@@ -1077,14 +1098,14 @@
                                                             {
                                                                 "name": "skip",
                                                                 "bool": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "Boolean to indicate if checking for Interface Errors needs to be skipped."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "wait_time_seconds",
                                                                 "int64": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "Wait Time (seconds) sample interval to verify if error counters increased."
                                                                 }
                                                             }
@@ -1095,7 +1116,7 @@
                                                 {
                                                     "name": "interface_selectors",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         }
@@ -1104,7 +1125,7 @@
                                                 {
                                                     "name": "node_selectors",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         }
@@ -1113,7 +1134,7 @@
                                                 {
                                                     "name": "nodes",
                                                     "list": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "element_type": {
                                                             "string": {}
                                                         }
@@ -1256,6 +1277,13 @@
                                                                                                                 }
                                                                                                             },
                                                                                                             {
+                                                                                                                "name": "lldp_operational_state",
+                                                                                                                "string": {
+                                                                                                                    "computed_optional_required": "computed",
+                                                                                                                    "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``)."
+                                                                                                                }
+                                                                                                            },
+                                                                                                            {
                                                                                                                 "name": "neighbors",
                                                                                                                 "list_nested": {
                                                                                                                     "computed_optional_required": "computed",
@@ -1265,14 +1293,14 @@
                                                                                                                                 "name": "interface",
                                                                                                                                 "string": {
                                                                                                                                     "computed_optional_required": "computed",
-                                                                                                                                    "description": "The name of a neighbor interface of this member in node specific format."
+                                                                                                                                    "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                                                                                 }
                                                                                                                             },
                                                                                                                             {
                                                                                                                                 "name": "node",
                                                                                                                                 "string": {
                                                                                                                                     "computed_optional_required": "computed",
-                                                                                                                                    "description": "The name of a neighbor node of this member in node specific format."
+                                                                                                                                    "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                                                                                 }
                                                                                                                             }
                                                                                                                         ]
@@ -1299,6 +1327,13 @@
                                                                                                                 "string": {
                                                                                                                     "computed_optional_required": "computed",
                                                                                                                     "description": "Indicates the current operational state of this member."
+                                                                                                                }
+                                                                                                            },
+                                                                                                            {
+                                                                                                                "name": "operational_state_reason",
+                                                                                                                "string": {
+                                                                                                                    "computed_optional_required": "computed",
+                                                                                                                    "description": "Indicates the reason for the operational state. Currently only used when the state is Down."
                                                                                                                 }
                                                                                                             },
                                                                                                             {
@@ -1367,6 +1402,13 @@
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "Aggregate result of the Flow"
+                                                    }
+                                                },
+                                                {
+                                                    "name": "summary",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text)."
                                                     }
                                                 }
                                             ],
@@ -1510,69 +1552,69 @@
                     {
                         "name": "spec",
                         "single_nested": {
-                            "computed_optional_required": "optional",
+                            "computed_optional_required": "computed",
                             "attributes": [
                                 {
                                     "name": "ddm",
                                     "bool": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Enables reporting of DDM events."
                                     }
                                 },
                                 {
                                     "name": "description",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Description of the interface."
                                     }
                                 },
                                 {
                                     "name": "enabled",
                                     "bool": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Enable or disable the interface."
                                     }
                                 },
                                 {
                                     "name": "encap_type",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Enable or disable VLAN tagging on this interface. [default=\"Null\"]"
                                     }
                                 },
                                 {
                                     "name": "ethernet",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "attributes": [
                                             {
                                                 "name": "crc_monitor",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "attributes": [
                                                         {
                                                             "name": "enabled",
                                                             "bool": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Enables CRC monitoring on the interface."
                                                             }
                                                         },
                                                         {
                                                             "name": "signal_degrade",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "exponent",
                                                                         "int64": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Threshold exponent for the signal degrade condition."
                                                                         }
                                                                     },
                                                                     {
                                                                         "name": "multiplier",
                                                                         "int64": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Threshold multiplier for the signal degrade condition."
                                                                         }
                                                                     }
@@ -1583,19 +1625,19 @@
                                                         {
                                                             "name": "signal_failure",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "exponent",
                                                                         "int64": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Threshold exponent for the signal failure condition."
                                                                         }
                                                                     },
                                                                     {
                                                                         "name": "multiplier",
                                                                         "int64": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Threshold multiplier for the signal failure condition."
                                                                         }
                                                                     }
@@ -1606,7 +1648,7 @@
                                                         {
                                                             "name": "window_size_seconds",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Sliding window size over which CRC errors are measured, in number of seconds."
                                                             }
                                                         }
@@ -1617,89 +1659,89 @@
                                             {
                                                 "name": "fec",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "Sets the Forward Error Correction (FEC) on the members of the interface."
                                                 }
                                             },
                                             {
                                                 "name": "hold_down_timer_ms",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "The hold-time down behavior is triggered with events that try to bring the ethernet interface down and can change quickly. It is not triggered with an admin-state disable event or interface disable due to other internal reasons.  Units in milliseconds."
                                                 }
                                             },
                                             {
                                                 "name": "hold_up_timer_ms",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "The hold-time up behavior is triggered with any event that tries to bring up the ethernet interface.  While the hold-time up is running, the transceiver laser will be enabled, however the higher layers will not be notified that the interface is operationally up until the timer expires.  Units in milliseconds."
                                                 }
                                             },
                                             {
                                                 "name": "loopback_mode",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "Enable dataplane loopback on the interface."
                                                 }
                                             },
                                             {
                                                 "name": "reload_delay_timer_seconds",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established."
                                                 }
                                             },
                                             {
                                                 "name": "speed",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "The speed of this interface, in human-readable format - e.g. 25G, 100G."
                                                 }
                                             },
                                             {
                                                 "name": "standby_signaling",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "Indicates the standby-signaling used in the interface."
                                                 }
                                             },
                                             {
                                                 "name": "storm_control",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "attributes": [
                                                         {
                                                             "name": "broadcast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Sets the maximum rate allowed for ingress broadcast frames on the interface."
                                                             }
                                                         },
                                                         {
                                                             "name": "enabled",
                                                             "bool": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Enables storm control."
                                                             }
                                                         },
                                                         {
                                                             "name": "multicast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Sets the maximum rate allowed for ingress multicast frames on the interface."
                                                             }
                                                         },
                                                         {
                                                             "name": "unit",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Set the unit of measurement for the storm control rates."
                                                             }
                                                         },
                                                         {
                                                             "name": "unknown_unicast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Sets the maximum rate allowed for ingress unknown unicast frames on the interface."
                                                             }
                                                         }
@@ -1710,7 +1752,7 @@
                                             {
                                                 "name": "transparent_l2cp_protocols",
                                                 "list": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "element_type": {
                                                         "string": {}
                                                     },
@@ -1724,43 +1766,43 @@
                                 {
                                     "name": "lag",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "attributes": [
                                             {
                                                 "name": "lacp",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "attributes": [
                                                         {
                                                             "name": "admin_key",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Configure the LACP admin-key to be advertised by the local system."
                                                             }
                                                         },
                                                         {
                                                             "name": "interval",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Set the period between LACP messages, uses the lacp-period-type enumeration. [default=\"Fast\"]"
                                                             }
                                                         },
                                                         {
                                                             "name": "lacp_fallback",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "mode",
                                                                         "string": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Specifies lacp-fallback mode if enabled."
                                                                         }
                                                                     },
                                                                     {
                                                                         "name": "timeout_seconds",
                                                                         "int64": {
-                                                                            "computed_optional_required": "optional",
+                                                                            "computed_optional_required": "computed",
                                                                             "description": "Specifies the LACP-fallback timeout interval in seconds. [default=60]"
                                                                         }
                                                                     }
@@ -1771,21 +1813,21 @@
                                                         {
                                                             "name": "mode",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Active is to initiate the transmission of LACP PDUs. Passive is to wait for peer to initiate the transmission of LACP PDUs.[default=\"Active\"]"
                                                             }
                                                         },
                                                         {
                                                             "name": "system_mac",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "The MAC address portion of the Node's System ID. This is combined with the system priority to construct the 8-octet system-id."
                                                             }
                                                         },
                                                         {
                                                             "name": "system_priority",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "System priority used by the Node on this LAG interface. Lower value is higher priority for determining which Node is the controlling system.[default=32768]"
                                                             }
                                                         }
@@ -1796,55 +1838,78 @@
                                             {
                                                 "name": "min_links",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "The min-link threshold specifies the minimum number of member links that must be active in order for the LAG to be operationally up. If the number of active links falls below this threshold, the entire LAG is brought operationally down.[default=1]"
                                                 }
                                             },
                                             {
                                                 "name": "multihoming",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "attributes": [
                                                         {
                                                             "name": "df_election",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Selects the DF election algorithm. If not specified, `default` is used with `AllActive` multi-homing and `HighestPreference` is used with `SingleActive` and `PortActive` multi-homing modes."
                                                             }
                                                         },
                                                         {
                                                             "name": "esi",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "10 byte Ethernet Segment Identifier, if not set a type 0 ESI is generated. [default=auto]"
                                                             }
                                                         },
                                                         {
                                                             "name": "mode",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "\"AllActive\": All interfaces are active. \"SingleActive\": In a single active MH LAG, the active and standby function is handled at the sub-interface layer within a network-instance.  That is, the physical interfaces within the same LAG all remain operationally up, however each sub-interface associated with a network-instance has its operational state up or down based on whether it is selected to be the active or standby sub-interface. \"PortActive\": When port active MH LAG is enabled, the active and standby function is handled at the interface level."
                                                             }
                                                         },
                                                         {
                                                             "name": "preferred_active_node",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured."
                                                             }
                                                         },
                                                         {
                                                             "name": "reload_delay_timer_seconds",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]"
                                                             }
                                                         },
                                                         {
                                                             "name": "revertive",
                                                             "bool": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed",
                                                                 "description": "Enables revertive DF election behavior with Preference-Based Election mode. [default=false]"
+                                                            }
+                                                        },
+                                                        {
+                                                            "name": "vtep",
+                                                            "single_nested": {
+                                                                "computed_optional_required": "computed",
+                                                                "attributes": [
+                                                                    {
+                                                                        "name": "anycast_ipv4pool",
+                                                                        "string": {
+                                                                            "computed_optional_required": "computed",
+                                                                            "description": "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast."
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "mode",
+                                                                        "string": {
+                                                                            "computed_optional_required": "computed",
+                                                                            "description": "VTEP mode for the Multi-homed Ethernet Segment."
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "description": "VTEP mode configuration for the Multi-homed Ethernet Segment."
                                                             }
                                                         }
                                                     ],
@@ -1854,7 +1919,7 @@
                                             {
                                                 "name": "type",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed",
                                                     "description": "This type defines whether whether it is a static or LACP LAG. [default=LACP]"
                                                 }
                                             }
@@ -1865,55 +1930,55 @@
                                 {
                                     "name": "lldp",
                                     "bool": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Enable or disable LLDP on the members of the interface."
                                     }
                                 },
                                 {
                                     "name": "members",
                                     "list_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "nested_object": {
                                             "attributes": [
                                                 {
                                                     "name": "aggregate_id",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "When using a LAG, the aggregateId can be specified per set of interfaces on a node.\nLAG interface with which this interface is associated."
                                                     }
                                                 },
                                                 {
                                                     "name": "description",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Description of the member, inherited from the interface if not provided."
                                                     }
                                                 },
                                                 {
                                                     "name": "enabled",
                                                     "bool": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Enable or disable this member."
                                                     }
                                                 },
                                                 {
                                                     "name": "interface",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Reference to an interface in the normalized format. Ex: SRL ethernet-1/1 would be ethernet-1-1. SROS port 2/1/1 would be ethernet-2-1."
                                                     }
                                                 },
                                                 {
                                                     "name": "lacp_port_priority",
                                                     "int64": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Configure the port priority for LACP. This value is used to determine which port should be activated with LACP fallback mode. Lower values are more preferred.[default=32768]"
                                                     }
                                                 },
                                                 {
                                                     "name": "node",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Node name."
                                                     }
                                                 }
@@ -1925,21 +1990,21 @@
                                 {
                                     "name": "mode",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Set interface mode for platforms that support explicit configuration of access or network mode. [SROS only]"
                                     }
                                 },
                                 {
                                     "name": "mtu",
                                     "int64": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "MTU to apply on the interface(s)."
                                     }
                                 },
                                 {
                                     "name": "type",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed",
                                         "description": "Type defines whether the interface is a LAG or a regular Interface."
                                     }
                                 }
@@ -2016,6 +2081,13 @@
                                                     }
                                                 },
                                                 {
+                                                    "name": "lldp_operational_state",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``)."
+                                                    }
+                                                },
+                                                {
                                                     "name": "neighbors",
                                                     "list_nested": {
                                                         "computed_optional_required": "computed",
@@ -2025,14 +2097,14 @@
                                                                     "name": "interface",
                                                                     "string": {
                                                                         "computed_optional_required": "computed",
-                                                                        "description": "The name of a neighbor interface of this member in node specific format."
+                                                                        "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "node",
                                                                     "string": {
                                                                         "computed_optional_required": "computed",
-                                                                        "description": "The name of a neighbor node of this member in node specific format."
+                                                                        "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                     }
                                                                 }
                                                             ]
@@ -2059,6 +2131,13 @@
                                                     "string": {
                                                         "computed_optional_required": "computed",
                                                         "description": "Indicates the current operational state of this member."
+                                                    }
+                                                },
+                                                {
+                                                    "name": "operational_state_reason",
+                                                    "string": {
+                                                        "computed_optional_required": "computed",
+                                                        "description": "Indicates the reason for the operational state. Currently only used when the state is Down."
                                                     }
                                                 },
                                                 {
@@ -2243,69 +2322,69 @@
                                     {
                                         "name": "spec",
                                         "single_nested": {
-                                            "computed_optional_required": "optional",
+                                            "computed_optional_required": "computed",
                                             "attributes": [
                                                 {
                                                     "name": "ddm",
                                                     "bool": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Enables reporting of DDM events."
                                                     }
                                                 },
                                                 {
                                                     "name": "description",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Description of the interface."
                                                     }
                                                 },
                                                 {
                                                     "name": "enabled",
                                                     "bool": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Enable or disable the interface."
                                                     }
                                                 },
                                                 {
                                                     "name": "encap_type",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Enable or disable VLAN tagging on this interface. [default=\"Null\"]"
                                                     }
                                                 },
                                                 {
                                                     "name": "ethernet",
                                                     "single_nested": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "attributes": [
                                                             {
                                                                 "name": "crc_monitor",
                                                                 "single_nested": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "attributes": [
                                                                         {
                                                                             "name": "enabled",
                                                                             "bool": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Enables CRC monitoring on the interface."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "signal_degrade",
                                                                             "single_nested": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "attributes": [
                                                                                     {
                                                                                         "name": "exponent",
                                                                                         "int64": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Threshold exponent for the signal degrade condition."
                                                                                         }
                                                                                     },
                                                                                     {
                                                                                         "name": "multiplier",
                                                                                         "int64": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Threshold multiplier for the signal degrade condition."
                                                                                         }
                                                                                     }
@@ -2316,19 +2395,19 @@
                                                                         {
                                                                             "name": "signal_failure",
                                                                             "single_nested": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "attributes": [
                                                                                     {
                                                                                         "name": "exponent",
                                                                                         "int64": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Threshold exponent for the signal failure condition."
                                                                                         }
                                                                                     },
                                                                                     {
                                                                                         "name": "multiplier",
                                                                                         "int64": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Threshold multiplier for the signal failure condition."
                                                                                         }
                                                                                     }
@@ -2339,7 +2418,7 @@
                                                                         {
                                                                             "name": "window_size_seconds",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Sliding window size over which CRC errors are measured, in number of seconds."
                                                                             }
                                                                         }
@@ -2350,89 +2429,89 @@
                                                             {
                                                                 "name": "fec",
                                                                 "string": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "Sets the Forward Error Correction (FEC) on the members of the interface."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "hold_down_timer_ms",
                                                                 "int64": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "The hold-time down behavior is triggered with events that try to bring the ethernet interface down and can change quickly. It is not triggered with an admin-state disable event or interface disable due to other internal reasons.  Units in milliseconds."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "hold_up_timer_ms",
                                                                 "int64": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "The hold-time up behavior is triggered with any event that tries to bring up the ethernet interface.  While the hold-time up is running, the transceiver laser will be enabled, however the higher layers will not be notified that the interface is operationally up until the timer expires.  Units in milliseconds."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "loopback_mode",
                                                                 "string": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "Enable dataplane loopback on the interface."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "reload_delay_timer_seconds",
                                                                 "int64": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "speed",
                                                                 "string": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "The speed of this interface, in human-readable format - e.g. 25G, 100G."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "standby_signaling",
                                                                 "string": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "Indicates the standby-signaling used in the interface."
                                                                 }
                                                             },
                                                             {
                                                                 "name": "storm_control",
                                                                 "single_nested": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "attributes": [
                                                                         {
                                                                             "name": "broadcast_rate",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Sets the maximum rate allowed for ingress broadcast frames on the interface."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "enabled",
                                                                             "bool": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Enables storm control."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "multicast_rate",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Sets the maximum rate allowed for ingress multicast frames on the interface."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "unit",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Set the unit of measurement for the storm control rates."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "unknown_unicast_rate",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Sets the maximum rate allowed for ingress unknown unicast frames on the interface."
                                                                             }
                                                                         }
@@ -2443,7 +2522,7 @@
                                                             {
                                                                 "name": "transparent_l2cp_protocols",
                                                                 "list": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "element_type": {
                                                                         "string": {}
                                                                     },
@@ -2457,43 +2536,43 @@
                                                 {
                                                     "name": "lag",
                                                     "single_nested": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "attributes": [
                                                             {
                                                                 "name": "lacp",
                                                                 "single_nested": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "attributes": [
                                                                         {
                                                                             "name": "admin_key",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Configure the LACP admin-key to be advertised by the local system."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "interval",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Set the period between LACP messages, uses the lacp-period-type enumeration. [default=\"Fast\"]"
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "lacp_fallback",
                                                                             "single_nested": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "attributes": [
                                                                                     {
                                                                                         "name": "mode",
                                                                                         "string": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Specifies lacp-fallback mode if enabled."
                                                                                         }
                                                                                     },
                                                                                     {
                                                                                         "name": "timeout_seconds",
                                                                                         "int64": {
-                                                                                            "computed_optional_required": "optional",
+                                                                                            "computed_optional_required": "computed",
                                                                                             "description": "Specifies the LACP-fallback timeout interval in seconds. [default=60]"
                                                                                         }
                                                                                     }
@@ -2504,21 +2583,21 @@
                                                                         {
                                                                             "name": "mode",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Active is to initiate the transmission of LACP PDUs. Passive is to wait for peer to initiate the transmission of LACP PDUs.[default=\"Active\"]"
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "system_mac",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "The MAC address portion of the Node's System ID. This is combined with the system priority to construct the 8-octet system-id."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "system_priority",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "System priority used by the Node on this LAG interface. Lower value is higher priority for determining which Node is the controlling system.[default=32768]"
                                                                             }
                                                                         }
@@ -2529,55 +2608,78 @@
                                                             {
                                                                 "name": "min_links",
                                                                 "int64": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "The min-link threshold specifies the minimum number of member links that must be active in order for the LAG to be operationally up. If the number of active links falls below this threshold, the entire LAG is brought operationally down.[default=1]"
                                                                 }
                                                             },
                                                             {
                                                                 "name": "multihoming",
                                                                 "single_nested": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "attributes": [
                                                                         {
                                                                             "name": "df_election",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Selects the DF election algorithm. If not specified, `default` is used with `AllActive` multi-homing and `HighestPreference` is used with `SingleActive` and `PortActive` multi-homing modes."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "esi",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "10 byte Ethernet Segment Identifier, if not set a type 0 ESI is generated. [default=auto]"
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "mode",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "\"AllActive\": All interfaces are active. \"SingleActive\": In a single active MH LAG, the active and standby function is handled at the sub-interface layer within a network-instance.  That is, the physical interfaces within the same LAG all remain operationally up, however each sub-interface associated with a network-instance has its operational state up or down based on whether it is selected to be the active or standby sub-interface. \"PortActive\": When port active MH LAG is enabled, the active and standby function is handled at the interface level."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "preferred_active_node",
                                                                             "string": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured."
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "reload_delay_timer_seconds",
                                                                             "int64": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established. [default=100]"
                                                                             }
                                                                         },
                                                                         {
                                                                             "name": "revertive",
                                                                             "bool": {
-                                                                                "computed_optional_required": "optional",
+                                                                                "computed_optional_required": "computed",
                                                                                 "description": "Enables revertive DF election behavior with Preference-Based Election mode. [default=false]"
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "name": "vtep",
+                                                                            "single_nested": {
+                                                                                "computed_optional_required": "computed",
+                                                                                "attributes": [
+                                                                                    {
+                                                                                        "name": "anycast_ipv4pool",
+                                                                                        "string": {
+                                                                                            "computed_optional_required": "computed",
+                                                                                            "description": "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast."
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "name": "mode",
+                                                                                        "string": {
+                                                                                            "computed_optional_required": "computed",
+                                                                                            "description": "VTEP mode for the Multi-homed Ethernet Segment."
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "description": "VTEP mode configuration for the Multi-homed Ethernet Segment."
                                                                             }
                                                                         }
                                                                     ],
@@ -2587,7 +2689,7 @@
                                                             {
                                                                 "name": "type",
                                                                 "string": {
-                                                                    "computed_optional_required": "optional",
+                                                                    "computed_optional_required": "computed",
                                                                     "description": "This type defines whether whether it is a static or LACP LAG. [default=LACP]"
                                                                 }
                                                             }
@@ -2598,55 +2700,55 @@
                                                 {
                                                     "name": "lldp",
                                                     "bool": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Enable or disable LLDP on the members of the interface."
                                                     }
                                                 },
                                                 {
                                                     "name": "members",
                                                     "list_nested": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "nested_object": {
                                                             "attributes": [
                                                                 {
                                                                     "name": "aggregate_id",
                                                                     "string": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "When using a LAG, the aggregateId can be specified per set of interfaces on a node.\nLAG interface with which this interface is associated."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "description",
                                                                     "string": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "Description of the member, inherited from the interface if not provided."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "enabled",
                                                                     "bool": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "Enable or disable this member."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "interface",
                                                                     "string": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "Reference to an interface in the normalized format. Ex: SRL ethernet-1/1 would be ethernet-1-1. SROS port 2/1/1 would be ethernet-2-1."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "lacp_port_priority",
                                                                     "int64": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "Configure the port priority for LACP. This value is used to determine which port should be activated with LACP fallback mode. Lower values are more preferred.[default=32768]"
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "node",
                                                                     "string": {
-                                                                        "computed_optional_required": "optional",
+                                                                        "computed_optional_required": "computed",
                                                                         "description": "Node name."
                                                                     }
                                                                 }
@@ -2658,21 +2760,21 @@
                                                 {
                                                     "name": "mode",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Set interface mode for platforms that support explicit configuration of access or network mode. [SROS only]"
                                                     }
                                                 },
                                                 {
                                                     "name": "mtu",
                                                     "int64": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "MTU to apply on the interface(s)."
                                                     }
                                                 },
                                                 {
                                                     "name": "type",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed",
                                                         "description": "Type defines whether the interface is a LAG or a regular Interface."
                                                     }
                                                 }
@@ -2749,6 +2851,13 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "name": "lldp_operational_state",
+                                                                    "string": {
+                                                                        "computed_optional_required": "computed",
+                                                                        "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``)."
+                                                                    }
+                                                                },
+                                                                {
                                                                     "name": "neighbors",
                                                                     "list_nested": {
                                                                         "computed_optional_required": "computed",
@@ -2758,14 +2867,14 @@
                                                                                     "name": "interface",
                                                                                     "string": {
                                                                                         "computed_optional_required": "computed",
-                                                                                        "description": "The name of a neighbor interface of this member in node specific format."
+                                                                                        "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                                     }
                                                                                 },
                                                                                 {
                                                                                     "name": "node",
                                                                                     "string": {
                                                                                         "computed_optional_required": "computed",
-                                                                                        "description": "The name of a neighbor node of this member in node specific format."
+                                                                                        "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                                     }
                                                                                 }
                                                                             ]
@@ -2792,6 +2901,13 @@
                                                                     "string": {
                                                                         "computed_optional_required": "computed",
                                                                         "description": "Indicates the current operational state of this member."
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "name": "operational_state_reason",
+                                                                    "string": {
+                                                                        "computed_optional_required": "computed",
+                                                                        "description": "Indicates the reason for the operational state. Currently only used when the state is Down."
                                                                     }
                                                                 },
                                                                 {
@@ -3173,7 +3289,7 @@
                                 {
                                     "name": "interfaces",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -3183,7 +3299,7 @@
                                 {
                                     "name": "node_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -3193,7 +3309,7 @@
                                 {
                                     "name": "nodes",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         },
@@ -3416,12 +3532,12 @@
                                 {
                                     "name": "check_state_counters",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "attributes": [
                                             {
                                                 "name": "checks",
                                                 "list": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "element_type": {
                                                         "string": {}
                                                     },
@@ -3467,7 +3583,7 @@
                                 {
                                     "name": "interface_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -3476,7 +3592,7 @@
                                 {
                                     "name": "node_selectors",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -3485,7 +3601,7 @@
                                 {
                                     "name": "nodes",
                                     "list": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "element_type": {
                                             "string": {}
                                         }
@@ -3580,7 +3696,19 @@
                                                                                             "name": "admin_key",
                                                                                             "int64": {
                                                                                                 "computed_optional_required": "computed_optional",
-                                                                                                "description": "LACP Admin Key."
+                                                                                                "description": "LACP Admin Key.",
+                                                                                                "validators": [
+                                                                                                    {
+                                                                                                        "custom": {
+                                                                                                            "imports": [
+                                                                                                                {
+                                                                                                                    "path": "github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "schema_definition": "int64validator.AtMost(65535)"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
                                                                                             }
                                                                                         },
                                                                                         {
@@ -3628,6 +3756,25 @@
                                                                                                 }
                                                                                             },
                                                                                             {
+                                                                                                "name": "lldp_operational_state",
+                                                                                                "string": {
+                                                                                                    "computed_optional_required": "computed_optional",
+                                                                                                    "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+                                                                                                    "validators": [
+                                                                                                        {
+                                                                                                            "custom": {
+                                                                                                                "imports": [
+                                                                                                                    {
+                                                                                                                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                                "schema_definition": "stringvalidator.OneOf(\n\"Aligned\",\n\"Misaligned\",\n\"Present\",\n\"NotPresent\",\n\"N/A\",\n)"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            },
+                                                                                            {
                                                                                                 "name": "neighbors",
                                                                                                 "list_nested": {
                                                                                                     "computed_optional_required": "computed_optional",
@@ -3637,14 +3784,14 @@
                                                                                                                 "name": "interface",
                                                                                                                 "string": {
                                                                                                                     "computed_optional_required": "computed_optional",
-                                                                                                                    "description": "The name of a neighbor interface of this member in node specific format."
+                                                                                                                    "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                                                                 }
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "node",
                                                                                                                 "string": {
                                                                                                                     "computed_optional_required": "computed_optional",
-                                                                                                                    "description": "The name of a neighbor node of this member in node specific format."
+                                                                                                                    "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                                                                 }
                                                                                                             }
                                                                                                         ]
@@ -3680,6 +3827,25 @@
                                                                                                                     }
                                                                                                                 ],
                                                                                                                 "schema_definition": "stringvalidator.OneOf(\n\"Up\",\n\"Down\",\n\"Degraded\",\n\"Unknown\",\n\"N/A\",\n)"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "name": "operational_state_reason",
+                                                                                                "string": {
+                                                                                                    "computed_optional_required": "computed_optional",
+                                                                                                    "description": "Indicates the reason for the operational state. Currently only used when the state is Down.",
+                                                                                                    "validators": [
+                                                                                                        {
+                                                                                                            "custom": {
+                                                                                                                "imports": [
+                                                                                                                    {
+                                                                                                                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                                "schema_definition": "stringvalidator.OneOf(\n\"Standby\",\n\"Other\",\n\"Lower Layer Down\",\n)"
                                                                                                             }
                                                                                                         }
                                                                                                     ]
@@ -3778,6 +3944,13 @@
                                                 }
                                             }
                                         ]
+                                    }
+                                },
+                                {
+                                    "name": "summary",
+                                    "string": {
+                                        "computed_optional_required": "computed_optional",
+                                        "description": "Summary is an optional human-readable summary (e.g. compare-with-previous degrade text)."
                                     }
                                 }
                             ],
@@ -3970,14 +4143,14 @@
                                 {
                                     "name": "ddm",
                                     "bool": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "description": "Enables reporting of DDM events."
                                     }
                                 },
                                 {
                                     "name": "description",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "description": "Description of the interface."
                                     }
                                 },
@@ -4016,24 +4189,24 @@
                                 {
                                     "name": "ethernet",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "attributes": [
                                             {
                                                 "name": "crc_monitor",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "attributes": [
                                                         {
                                                             "name": "enabled",
                                                             "bool": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Enables CRC monitoring on the interface."
                                                             }
                                                         },
                                                         {
                                                             "name": "signal_degrade",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "exponent",
@@ -4080,7 +4253,7 @@
                                                         {
                                                             "name": "signal_failure",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "exponent",
@@ -4127,7 +4300,7 @@
                                                         {
                                                             "name": "window_size_seconds",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Sliding window size over which CRC errors are measured, in number of seconds.",
                                                                 "validators": [
                                                                     {
@@ -4137,7 +4310,7 @@
                                                                                     "path": "github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
                                                                                 }
                                                                             ],
-                                                                            "schema_definition": "int64validator.AtLeast(1)"
+                                                                            "schema_definition": "int64validator.Between(1, 65535)"
                                                                         }
                                                                     }
                                                                 ]
@@ -4150,7 +4323,7 @@
                                             {
                                                 "name": "fec",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "Sets the Forward Error Correction (FEC) on the members of the interface.",
                                                     "validators": [
                                                         {
@@ -4169,7 +4342,7 @@
                                             {
                                                 "name": "hold_down_timer_ms",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "The hold-time down behavior is triggered with events that try to bring the ethernet interface down and can change quickly. It is not triggered with an admin-state disable event or interface disable due to other internal reasons.  Units in milliseconds.",
                                                     "validators": [
                                                         {
@@ -4188,7 +4361,7 @@
                                             {
                                                 "name": "hold_up_timer_ms",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "The hold-time up behavior is triggered with any event that tries to bring up the ethernet interface.  While the hold-time up is running, the transceiver laser will be enabled, however the higher layers will not be notified that the interface is operationally up until the timer expires.  Units in milliseconds.",
                                                     "validators": [
                                                         {
@@ -4207,7 +4380,7 @@
                                             {
                                                 "name": "loopback_mode",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "Enable dataplane loopback on the interface.",
                                                     "validators": [
                                                         {
@@ -4226,7 +4399,7 @@
                                             {
                                                 "name": "reload_delay_timer_seconds",
                                                 "int64": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "After the system boots, the reload-delay timer in seconds keeps an interface shut down with the laser off for a configured amount of time until connectivity with the rest of network is established.",
                                                     "validators": [
                                                         {
@@ -4245,7 +4418,7 @@
                                             {
                                                 "name": "speed",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "The speed of this interface, in human-readable format - e.g. 25G, 100G.",
                                                     "validators": [
                                                         {
@@ -4264,7 +4437,7 @@
                                             {
                                                 "name": "standby_signaling",
                                                 "string": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "description": "Indicates the standby-signaling used in the interface.",
                                                     "validators": [
                                                         {
@@ -4283,12 +4456,12 @@
                                             {
                                                 "name": "storm_control",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "attributes": [
                                                         {
                                                             "name": "broadcast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Sets the maximum rate allowed for ingress broadcast frames on the interface.",
                                                                 "validators": [
                                                                     {
@@ -4307,14 +4480,14 @@
                                                         {
                                                             "name": "enabled",
                                                             "bool": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Enables storm control."
                                                             }
                                                         },
                                                         {
                                                             "name": "multicast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Sets the maximum rate allowed for ingress multicast frames on the interface.",
                                                                 "validators": [
                                                                     {
@@ -4333,7 +4506,7 @@
                                                         {
                                                             "name": "unit",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Set the unit of measurement for the storm control rates.",
                                                                 "validators": [
                                                                     {
@@ -4352,7 +4525,7 @@
                                                         {
                                                             "name": "unknown_unicast_rate",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Sets the maximum rate allowed for ingress unknown unicast frames on the interface.",
                                                                 "validators": [
                                                                     {
@@ -4375,7 +4548,7 @@
                                             {
                                                 "name": "transparent_l2cp_protocols",
                                                 "list": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "element_type": {
                                                         "string": {}
                                                     },
@@ -4389,17 +4562,17 @@
                                 {
                                     "name": "lag",
                                     "single_nested": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "attributes": [
                                             {
                                                 "name": "lacp",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "attributes": [
                                                         {
                                                             "name": "admin_key",
                                                             "int64": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Configure the LACP admin-key to be advertised by the local system.",
                                                                 "validators": [
                                                                     {
@@ -4440,7 +4613,7 @@
                                                         {
                                                             "name": "lacp_fallback",
                                                             "single_nested": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "attributes": [
                                                                     {
                                                                         "name": "mode",
@@ -4515,7 +4688,7 @@
                                                         {
                                                             "name": "system_mac",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "The MAC address portion of the Node's System ID. This is combined with the system priority to construct the 8-octet system-id."
                                                             }
                                                         },
@@ -4570,12 +4743,12 @@
                                             {
                                                 "name": "multihoming",
                                                 "single_nested": {
-                                                    "computed_optional_required": "optional",
+                                                    "computed_optional_required": "computed_optional",
                                                     "attributes": [
                                                         {
                                                             "name": "df_election",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "Selects the DF election algorithm. If not specified, `default` is used with `AllActive` multi-homing and `HighestPreference` is used with `SingleActive` and `PortActive` multi-homing modes.",
                                                                 "validators": [
                                                                     {
@@ -4626,7 +4799,7 @@
                                                         {
                                                             "name": "preferred_active_node",
                                                             "string": {
-                                                                "computed_optional_required": "optional",
+                                                                "computed_optional_required": "computed_optional",
                                                                 "description": "When configured with a reference to the Node object and the Highest-Preference DF election algorightm is used, the selected Node is set with a higher preference value.  All other Nodes have a lower value configured."
                                                             }
                                                         },
@@ -4660,6 +4833,44 @@
                                                                     "static": false
                                                                 },
                                                                 "description": "Enables revertive DF election behavior with Preference-Based Election mode. [default=false]"
+                                                            }
+                                                        },
+                                                        {
+                                                            "name": "vtep",
+                                                            "single_nested": {
+                                                                "computed_optional_required": "computed_optional",
+                                                                "attributes": [
+                                                                    {
+                                                                        "name": "anycast_ipv4pool",
+                                                                        "string": {
+                                                                            "computed_optional_required": "computed_optional",
+                                                                            "description": "Reference to a pool of anycast IPv4 addresses for the Multi-homed Ethernet Segment. Applicable only if the mode is set to Anycast."
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "mode",
+                                                                        "string": {
+                                                                            "computed_optional_required": "computed_optional",
+                                                                            "default": {
+                                                                                "static": "Unicast"
+                                                                            },
+                                                                            "description": "VTEP mode for the Multi-homed Ethernet Segment.",
+                                                                            "validators": [
+                                                                                {
+                                                                                    "custom": {
+                                                                                        "imports": [
+                                                                                            {
+                                                                                                "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                                                            }
+                                                                                        ],
+                                                                                        "schema_definition": "stringvalidator.OneOf(\n\"Unicast\",\n\"Anycast\",\n)"
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "description": "VTEP mode configuration for the Multi-homed Ethernet Segment."
                                                             }
                                                         }
                                                     ],
@@ -4711,14 +4922,14 @@
                                                 {
                                                     "name": "aggregate_id",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed_optional",
                                                         "description": "When using a LAG, the aggregateId can be specified per set of interfaces on a node.\nLAG interface with which this interface is associated."
                                                     }
                                                 },
                                                 {
                                                     "name": "description",
                                                     "string": {
-                                                        "computed_optional_required": "optional",
+                                                        "computed_optional_required": "computed_optional",
                                                         "description": "Description of the member, inherited from the interface if not provided."
                                                     }
                                                 },
@@ -4776,7 +4987,7 @@
                                 {
                                     "name": "mode",
                                     "string": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "description": "Set interface mode for platforms that support explicit configuration of access or network mode. [SROS only]",
                                         "validators": [
                                             {
@@ -4795,7 +5006,7 @@
                                 {
                                     "name": "mtu",
                                     "int64": {
-                                        "computed_optional_required": "optional",
+                                        "computed_optional_required": "computed_optional",
                                         "description": "MTU to apply on the interface(s).",
                                         "validators": [
                                             {
@@ -4858,7 +5069,19 @@
                                                 "name": "admin_key",
                                                 "int64": {
                                                     "computed_optional_required": "computed_optional",
-                                                    "description": "LACP Admin Key."
+                                                    "description": "LACP Admin Key.",
+                                                    "validators": [
+                                                        {
+                                                            "custom": {
+                                                                "imports": [
+                                                                    {
+                                                                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+                                                                    }
+                                                                ],
+                                                                "schema_definition": "int64validator.AtMost(65535)"
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {
@@ -4906,6 +5129,25 @@
                                                     }
                                                 },
                                                 {
+                                                    "name": "lldp_operational_state",
+                                                    "string": {
+                                                        "computed_optional_required": "computed_optional",
+                                                        "description": "Indicates how the discovered LLDP neighbor on this member relates to the\nconfigured topology mate.\n\n  * ``Aligned``    – LLDP is enabled on the local member and the discovered\n                     neighbor matches the configured remote endpoint\n                     (TopoLink mate / static neighbor).\n  * ``Misaligned`` – LLDP is enabled and a neighbor is discovered, but it\n                     does not match the configured remote endpoint. This\n                     is the only state that raises ``LLDPTopologyMisaligned``.\n  * ``Present``    – LLDP is enabled and at least one neighbor is\n                     discovered, but the configured remote endpoint is not\n                     authoritative enough to validate alignment (no\n                     TopoLink resolved, peer Interface CR missing on an\n                     interSwitch link, or stub edge with no mate).\n  * ``NotPresent`` – LLDP is enabled but no neighbor has been discovered.\n  * ``N/A``        – LLDP is administratively disabled on the local member\n                     (``spec.lldp == false``).",
+                                                        "validators": [
+                                                            {
+                                                                "custom": {
+                                                                    "imports": [
+                                                                        {
+                                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                                        }
+                                                                    ],
+                                                                    "schema_definition": "stringvalidator.OneOf(\n\"Aligned\",\n\"Misaligned\",\n\"Present\",\n\"NotPresent\",\n\"N/A\",\n)"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "name": "neighbors",
                                                     "list_nested": {
                                                         "computed_optional_required": "computed_optional",
@@ -4915,14 +5157,14 @@
                                                                     "name": "interface",
                                                                     "string": {
                                                                         "computed_optional_required": "computed_optional",
-                                                                        "description": "The name of a neighbor interface of this member in node specific format."
+                                                                        "description": "The neighbor interface name. When the neighbor node is EDA-managed\nthis is reported in TopoLink-normalized form (e.g. ``ethernet-1-1``);\nfor non-EDA-managed peers the LLDP wire form is preserved."
                                                                     }
                                                                 },
                                                                 {
                                                                     "name": "node",
                                                                     "string": {
                                                                         "computed_optional_required": "computed_optional",
-                                                                        "description": "The name of a neighbor node of this member in node specific format."
+                                                                        "description": "The name of a neighbor node of this member. When the neighbor is an\nEDA-managed TopoNode this matches the TopoNode name; otherwise the\nLLDP system-name TLV is used as-is."
                                                                     }
                                                                 }
                                                             ]
@@ -4958,6 +5200,25 @@
                                                                         }
                                                                     ],
                                                                     "schema_definition": "stringvalidator.OneOf(\n\"Up\",\n\"Down\",\n\"Degraded\",\n\"Unknown\",\n\"N/A\",\n)"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "name": "operational_state_reason",
+                                                    "string": {
+                                                        "computed_optional_required": "computed_optional",
+                                                        "description": "Indicates the reason for the operational state. Currently only used when the state is Down.",
+                                                        "validators": [
+                                                            {
+                                                                "custom": {
+                                                                    "imports": [
+                                                                        {
+                                                                            "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                                                                        }
+                                                                    ],
+                                                                    "schema_definition": "stringvalidator.OneOf(\n\"Standby\",\n\"Other\",\n\"Lower Layer Down\",\n)"
                                                                 }
                                                             }
                                                         ]
